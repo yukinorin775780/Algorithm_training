@@ -1,0 +1,19 @@
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int left = 0;
+        int right = nums.length - 1;
+        int[] res = new int[nums.length];
+        for(int index = nums.length-1;left<=right;index--){
+            int sqrLeft = nums[left] * nums[left];
+            int sqrRight = nums[right] * nums[right];
+            if(sqrLeft>sqrRight){
+                res[index] = sqrLeft;
+                ++left;
+            }else{
+                res[index] = sqrRight;
+                --right;
+            }
+        }
+        return res;
+    }
+}
