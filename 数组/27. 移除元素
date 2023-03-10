@@ -1,16 +1,13 @@
 class Solution {
-    public int search(int[] nums, int target) {
-        int left = 0;
-        int right = nums.length;
-        while(left < right){
-            int middle = (left + right) / 2;
-            if(nums[middle] > target){
-                right = middle;
-            }else if(nums[middle] < target){
-                left = middle + 1;
-            }else
-                return middle;
+    public int removeElement(int[] nums, int val) {
+        int slow = 0;// 慢指针
+        for(int fast=0;fast<nums.length;fast++){
+            //当快指针向后移动时发现当前数值!=val时，将快指针指向的值赋给慢指针指向的值，并且慢指针++
+            if(nums[fast]!=val){
+                nums[slow++] = nums[fast];
+            }
         }
-        return -1;
+        //最后数组的长度即为慢指针移动到的位置
+        return slow;
     }
 }
