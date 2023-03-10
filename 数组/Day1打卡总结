@@ -1,0 +1,31 @@
+数组理论基础:
+https://programmercarl.com/%E6%95%B0%E7%BB%84%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html
+
+704.二分查找:
+题目链接：https://leetcode.cn/problems/binary-search/
+文章讲解：https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html
+视频讲解：https://www.bilibili.com/video/BV1fA4y1o715
+
+27. 移除元素:
+题目链接：https://leetcode.cn/problems/remove-element/
+文章讲解：https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html
+视频讲解：https://www.bilibili.com/video/BV12A4y1Z7LP
+
+● 自己看到题目的第一想法：
+
+就704而言，看到二分法时也没有什么概念，所以就是遍历整个数组，找到目标元素，输出下标。
+就27而言，new一个新数组，然后遍历整个数组，遇到target不放到新数组中，最后把新数组赋给原数组，并返回新数组的长度。
+
+● 看完代码随想录之后的想法：
+就704而言，感觉豁然开朗，一开始对于左闭右闭和左闭右开区间在代码上的不同的云里雾里再看完解析后就烟消云散了。手搓代码的过程中区分<=或=的关键在于区间的开闭情况，要具体问题具体分析，
+如果实在不行，可以画个图，然后用left, middle和right进行定位。一目了然。
+
+就27而言，牛的一批的解决思路，丝滑且易于理解。通过快指针遍历整个数组，指向每一个留下来的元素的同时，用慢指针指向留下来元素应该放在什么位置。
+而遍历完整个数组后，慢指针指向的刚刚好代替后数组的长度值。
+
+● 自己实现过程中遇到哪些困难或者错误：
+704而言要特别注意，当选择左闭右开的区间时，right的初始值要设定为nums.length而不是nums.length-1。因为区间为右开时，取不到nums.length-1也就是数组的最后一位，
+所以必须是 right = nums.length; 才可以取到数组的最后一位。不仅如此，在nums[middle]<target时，因为是左闭的区间，此时正确的 left = middle + 1 ;
+
+27而言没有什么难懂的地方，但要记住这种思考的模式。
+
