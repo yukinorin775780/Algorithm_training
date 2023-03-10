@@ -1,9 +1,9 @@
 class Solution {
     public int[] sortedSquares(int[] nums) {
-        int left = 0;
-        int right = nums.length - 1;
-        int[] res = new int[nums.length];
-        for(int index = nums.length-1;left<=right;index--){
+        int left = 0;// 左指针
+        int right = nums.length - 1;// 右指针
+        int[] res = new int[nums.length];// 答案数组
+        for(int index = nums.length-1;left<=right;index--){//从数组的最右端开始，将最大的数字逐一放入答案数组
             int sqrLeft = nums[left] * nums[left];
             int sqrRight = nums[right] * nums[right];
             if(sqrLeft>sqrRight){
