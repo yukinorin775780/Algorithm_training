@@ -1,1 +1,40 @@
+977.有序数组的平方
+题目链接：https://leetcode.cn/problems/squares-of-a-sorted-array/
+文章讲解：https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html
+视频讲解：https://www.bilibili.com/video/BV1QB4y1D7ep
+
+209.长度最小的子数组
+题目链接：https://leetcode.cn/problems/minimum-size-subarray-sum/
+文章讲解：https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html
+视频讲解：https://www.bilibili.com/video/BV1tZ4y1q7XE
+
+59.螺旋矩阵II
+题目链接：https://leetcode.cn/problems/spiral-matrix-ii/
+文章讲解：https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html
+视频讲解：https://www.bilibili.com/video/BV1SL4y1N7mV
+
+● 自己看到题目的第一想法：
+
+977: 暴力排序，将数组中每个数值先平方，后快速排序。
+209: 没有任何想法，连暴力搜索的想法都没有，但是想到双指针+循环又无从下手。
+59: 找规律，找到了一部分规律，如: n是多少就是n*n的矩阵，循环的条件是n-1,然后n-2等等，但是汇总不起来。
+
+● 看完代码随想录之后的想法：
+
+977: 关键的问题在于发现暗藏在题目里的规律，即无论数组怎样变化，其不变的是平方后的最大的数总是出现在数组的头或尾(left或right)。明白这个规律后就可以利用双指针完成对于数组的排序。
+但需要注意的是，要对数组进行从小到大的排序，所以i要从nums.length-1开始。
+209: 动态的滑动窗口很好的解决了这一问题。用for循环控制子序列的终止位置，在for循环内部再用while循环(条件是sum>=target)控制子序列的起始位置。
+59: c++版本更加的具体详细，仿照c++版本写的更易于理解。关键在于循环的控制条件:是顺时针旋转的圈数(当n=3时，旋转了一圈但是少中心点，当n=4时，旋转了两圈，以此类推)。
+同样重要的是每行每列循环的终止条件，即左闭右开的思路去控制循环(每天边的循环条件一致，遵循头到 尾-1)。在c++版中，通过offset变量来完成第几圈(即右边界收缩几位)。
+在第二版中(Java)简化了offset变量，另其和loop(循环的圈数)为一个变量，同时也从(startx,starty)两个变量简化为(start,start)一个变量，更简单但不易于理解。
+
+● 自己实现过程中遇到哪些困难或者错误：
+
+977: 1)要注意循环的终止条件，一开始的错误在于没有注意条件，而是草率的写成i>=0，但真正的终止条件应该是左右指针移动到相同位置时，即left<=right。
+     2)要新创建一个存放答案的数组，不能像 27.移除元素 一样使用原数组替代的方式。因为像是[-4,0,3]这样的数组，
+     发现nums[left]^2>nums[right]^2后, nums[i=length-1] = nums[left]^2 = 16; 原数组就变成了[-4,0,16]，这并不是需要的结果。
+209: 1)在while循环内的res需要用到Math.min函数来动态的确保最小值。
+     2)result最开始要赋予最大值！因为如果赋予0的话，在while循环内的min函数就永远都取到0。
+     3)return语句中result如果等于最大值，即没有符合要求的子序列，需要更新为0。
+59: 1)注意每行每列循环的终止条件 2)注意n为奇数是要单独给矩阵中间位置赋值
 
