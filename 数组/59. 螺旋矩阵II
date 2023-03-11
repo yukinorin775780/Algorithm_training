@@ -1,0 +1,65 @@
+方法一:
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] res = new int[n][n];
+        int startx = 0;//行，循环的起始点(startx,starty)
+        int starty = 0;//列，循环的起始点(startx,starty)
+        int loop = n/2;//控制循环次数
+        int count = 1;//填充的数字
+        int offset = 1;//第几圈，即右边界收缩一位
+        int i,j;//行，列
+        while(loop-- > 0){
+            for(j=starty;j<n-offset;j++){
+                res[startx][j] = count++;
+            }
+            for(i=startx;i<n-offset;i++){
+                res[i][j] = count++;
+            }
+            for(;j>starty;j--){
+                res[i][j] = count++;
+            }
+            for(;i>startx;i--){
+                res[i][j] = count++;
+            }
+            //第二圈开始后，起始位置要各自+1
+            startx++;
+            starty++;
+            //offset控制每一圈每一条边遍历的长度
+            offset+=1;
+        }
+        //如果n为奇数的话，需要单独给矩阵中间位置赋值
+        if(n%2==1)
+            res[n/2][n/2] = count;
+        return res;
+    }
+}
+方法2:
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int[][] res = new int[n][n];
+        int start = 0;//行，列循环的起始点(startx,starty)
+        int loop = 0;//控制循环次数
+        int count = 1;//填充的数字
+        int i,j;//行，列
+        while(loop++ < n/2 ){// n/2=螺旋的圈数
+            for(j=start;j<n-loop;j++){
+                res[start][j] = count++;
+            }
+            for(i=start;i<n-loop;i++){
+                res[i][j] = count++;
+            }
+            for(;j>=loop;j--){
+                res[i][j] = count++;
+            }
+            for(;i>=loop;i--){
+                res[i][j] = count++;
+            }
+            //第二圈开始后，起始位置要+1
+            start++;
+        }
+        //如果n为奇数的话，需要单独给矩阵中间位置赋值
+        if(n%2==1)
+            res[n/2][n/2] = count;
+        return res;
+    }
+}
