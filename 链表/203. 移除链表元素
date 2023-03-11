@@ -1,0 +1,39 @@
+//方法1(无虚拟头节点)
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        while(head!=null && head.val==val){//如果头节点是要删除的节点
+            head = head.next;
+        }
+        ListNode pre = head;//取当前节点的上一个节点
+        while(pre!=null){//因为pre=head，要提防在上一步所有节点都被删除了
+            while(pre.next!=null && pre.next.val==val){//当前节点的不为空且是要删除的节点
+                //把上一个节点.next.next也就是当前节点的下一个节点赋给上一个节点的下一个节点，完成删除当前节点
+                pre.next=pre.next.next;
+            }
+                pre = pre.next;//更新
+        }
+        return head;
+    }
+}
+
+//方法2(虚拟头节点)
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        if(head==null){
+            return head;
+        }
+        //虚拟头节点，指向头节点
+        ListNode dummy = new ListNode(-1,head);
+        ListNode pre = dummy;//上一个节点
+        ListNode cur = head;//当前节点
+        while(cur!=null){//当前节点不为空
+            if(cur.val == val){//要删除的节点
+                pre.next = cur.next;
+            }else{
+                pre = cur;//确保当前节点不是要删除的节点后，将上一个节点移动到当前节点
+            }
+            cur = cur.next;//把下一个节点赋给当前节点
+        }
+        return dummy.next;//不是head是因为head有可能已经被我们删除了。
+    }
+}
