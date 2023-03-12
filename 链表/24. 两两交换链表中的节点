@@ -1,0 +1,22 @@
+//方法1:迭代
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode(0);//虚拟头节点
+        dummy.next = head;//虚拟头节点的next指向head节点
+        ListNode cur = dummy;
+        ListNode temp;// 临时节点，用来保存两个节点之后的节点
+        ListNode firstNode;// 用来保存两个节点中第一个节点
+        ListNode secondNode;// 用来保存两个节点中第二个节点
+        while(cur.next!=null&&cur.next.next!=null){
+            temp = cur.next.next.next;
+            firstNode = cur.next;
+            secondNode = cur.next.next;
+            cur.next = secondNode;//先把虚拟头节点指向第二个节点
+            secondNode.next = firstNode;//再把第二个节点指向第一个节点
+            firstNode.next = temp;//最后把第一个节点指向两个节点之后的节点
+            cur = firstNode;//cur移动到第一个节点(但实际上换了位置，是第二个节点)
+        }
+        return dummy.next;
+    }
+}
+//方法2:递归
