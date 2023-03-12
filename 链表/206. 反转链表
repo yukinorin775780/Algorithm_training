@@ -1,0 +1,33 @@
+//双指针
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;//虚拟头指针
+        ListNode cur = head;//头指针
+        ListNode temp = null;//用于储存cur.next
+        while(cur!=null){
+            temp = cur.next;
+            cur.next = pre;
+            //先移pre,再移cur
+            pre = cur;
+            cur = temp;
+        }
+        return pre;
+    }
+}
+
+//递归
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        return reverse(head,null);
+    }
+
+    public ListNode reverse(ListNode cur,ListNode pre){
+        if(cur==null){//递归终止条件，当cur指向null时，已完成翻转，返回头节点pre
+            return pre;
+        }
+        ListNode temp = null;
+        temp = cur.next;//保存cur.next
+        cur.next = pre;//翻转方向
+        return reverse(temp,cur);
+    }
+}
