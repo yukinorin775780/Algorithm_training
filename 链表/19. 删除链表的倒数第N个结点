@@ -1,0 +1,18 @@
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;//虚拟头节点
+        ListNode fast = dummy;//快指针
+        ListNode slow = dummy;//慢指针
+        for(int i=0;i<=n;i++){//快指针先移动n+1步
+            fast = fast.next;
+        }
+        while(fast!=null){//快慢指针同时移动，直到快指针指向空，即遍历完整个链表
+            fast = fast.next;
+            slow = slow.next;
+        }
+        //此时slow指向的是倒数第n-1个节点，进行删除操作
+        slow.next = slow.next.next;
+        return dummy.next;
+    }
+}
