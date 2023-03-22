@@ -1,0 +1,23 @@
+import java.util.*;
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        int[] res = new int[2];//存放结果，两个数的下标
+        if(nums==null||nums.length==0){//若目标数组为空则返回空
+            return res;
+        }
+        //使用Map,key存放nums的数值,value存放nums数值的下标.
+        Map<Integer,Integer> map = new HashMap<>();
+        for(int i = 0; i < nums.length;i++){
+            int temp = target - nums[i];
+            //遍历当前元素，并在map中寻找是否有匹配的key.
+            if(map.containsKey(temp)){//如果匹配到，则return;
+                res[1] = i;
+                res[0] = map.get(temp);
+                break;
+            }
+            map.put(nums[i],i);//如果没有匹配到，就把访问过的元素和下标加入到map中.
+        }
+        return res;
+    }
+}
