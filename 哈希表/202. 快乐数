@@ -1,0 +1,23 @@
+import java.util.*;
+
+class Solution {
+    public boolean isHappy(int n) {
+        Set<Integer> record = new HashSet<>();
+        n = getSum(n);
+        while(n != 1 && !record.contains(n)){//n==1时或record中存在n时停止
+            record.add(n);   
+            n = getSum(n);
+        }
+        return n == 1;
+    }
+
+    public int getSum(int n){
+        int sum = 0;
+        while(n > 0){
+            int temp = n % 10;
+            sum += temp * temp;
+            n = n / 10;
+        }
+        return sum;
+    }
+}
