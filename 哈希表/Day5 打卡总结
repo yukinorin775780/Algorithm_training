@@ -1,6 +1,7 @@
 哈希表理论基础
 文章讲解: https://programmercarl.com/%E5%93%88%E5%B8%8C%E8%A1%A8%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html
 总结: 当遇到了要快速判断一个元素是否出现集合里时，就要考虑哈希法！！！！！！
+同时也需要熟悉数组, Set, Map的使用方法。
 
 242.有效的字母异位词
 题目链接: https://leetcode.cn/problems/valid-anagram/
