@@ -1,0 +1,30 @@
+import java.util.*;
+
+class Solution {
+    public int fourSumCount(int[] nums1, int[] nums2, int[] nums3, int[] nums4) {
+        Map<Integer,Integer> map = new HashMap<>();
+        int temp;
+        int res = 0;
+        //统计两个数组的元素之和以及初心啊的次数放入map
+        for(int i : nums1){
+            for(int j : nums2){
+                temp = i + j;
+                if(map.containsKey(temp)){//如果出现过，出现次数+1
+                    map.put(temp,map.get(temp)+1);
+                }else{//如果没有出现过，放入新的
+                    map.put(temp,1);
+                }
+            }
+        }
+        //统计另外两个数组的元素之和，并在map中查找是否存在相加=0的情况
+        for(int i : nums3){
+            for(int j : nums4){
+                temp = i + j;
+                if(map.containsKey(0 - temp)){//找到存在相加=0的情况
+                    res += map.get(0 - temp);//加上出现的次数即value
+                }
+            }
+        }
+        return res;
+    }
+}
