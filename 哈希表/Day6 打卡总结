@@ -3,7 +3,7 @@
 文章讲解/视频讲解: https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html
 
 383. 赎金信
-题目链接: 
+题目链接: https://leetcode.cn/problems/ransom-note/
 文章讲解: https://programmercarl.com/0383.%E8%B5%8E%E9%87%91%E4%BF%A1.html
 
 15. 三数之和
@@ -16,19 +16,19 @@
 
 ● 自己看到题目的第一想法：
 454. 暴力检索，4层for循环嵌套，时间复杂度为O(n^4)。
-383. 
+383. 将ransomNote拆分成一个个字母存到0-25的数组中，统计出现的次数。再把magazine拆分成一个个字母在数组相应下标进行减法操作，如果出现负数则return false。
 15. 
 18. 
 
 
 ● 看完代码随想录之后的想法：
 454. 将4组数组分为两两一组，先让AB循环得出一个a+b的map(不仅要统计a+b的和(key)还要统计a+b的值出现的次数(value))，再CD累加循环的同时判断a+b集合中有无出现过相加得0的元素。时间复杂度为O(n^2).
-383. 
+383. 没有认真审题，题意是指ransomNote中所有的字符是否全部包含在magazine中，即需要满足 magazine - ransomNote >= 0.
 15. 
 18. 
 
 ● 自己实现过程中遇到哪些困难或者错误：
 454. 无
-383. 
+383. 对于字符串的某些方法需要了解 xxx.toCharArray(). 需要理题意: 需要用magazine里面的字符去拼凑成一封ransomNote，magazine可以多但不能少。
 15. 
 18. 
