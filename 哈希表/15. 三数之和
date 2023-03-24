@@ -1,0 +1,40 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        Arrays.sort(nums);//进行双指针的前提，对数组进行排序
+        //找出a+b+c=0,其中 a=nums[i], b=nums[left], c=nums[right]
+        for(int i = 0; i < nums.length; i++){
+            //如果第一位数已经>0，则无论如何也凑不成三元组，因为数组已经排序过了，直接返回结果。
+            if(nums[i]>0){
+                return result;
+            }
+            //对a进行去重操作，即前一个a跟当前a相等，则跳过。
+            if(i > 0 && nums[i]==nums[i-1]){
+                continue;
+            }
+
+            int left = i + 1;
+            int right = nums.length - 1;
+            while(right>left){//注意循环条件，不能=，因为=时就只有两个数，凑不成三元组
+                int sum = nums[i] + nums[left] + nums[right];
+                if(sum > 0){
+                    right--;
+                }else if(sum < 0){
+                    left++;
+                }else{
+                    result.add(Arrays.asList(nums[i],nums[left],nums[right]));
+                    //找到一个三元组后，进行b和c的去重操作
+                    while(right > left && nums[right] == nums[right - 1]){
+                        right--;
+                    }
+                    while(right > left && nums[left] == nums[left+1]){
+                        left++;
+                    }
+                    right--;
+                    left++;
+                }
+            }
+        }
+        return result;
+    }
+}
