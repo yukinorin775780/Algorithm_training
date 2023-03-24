@@ -1,0 +1,46 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        //双指针的前提是排序!!!
+        Arrays.sort(nums);
+
+        for(int i = 0; i < nums.length; i++){
+            //nums[i] > target且nums[i] > 0, 直接返回，剪枝操作，同时避免了target<0的情况
+            if(nums[i] > 0 && nums[i] > target){
+                return result;
+            }
+            if(i > 0 && nums[i - 1] == nums[i]){//对第一个数nums[i]去重
+                continue;
+            }
+            for(int j = i + 1; j < nums.length; j++){
+                if(j > i + 1 && nums[j - 1] == nums[j]){//对第二个数nums[j]去重
+                    continue;
+                }
+                int left = j + 1;
+                int right = nums.length - 1;
+                while(right > left){
+                    //注意nums[i]的范围，有可能溢出
+                    long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];
+                    if(sum > target){
+                        right--;
+                    }else if(sum < target){
+                        left++;
+                    }else{
+                        result.add(Arrays.asList(nums[i], nums[j], nums[left], nums[right]));
+                        //对第三、四个数 nums[left]和nums[right]去重
+                        while(right > left && nums[right] == nums[right - 1]){
+                            right--;
+                        }
+                        while(right > left && nums[left] == nums[left + 1]){
+                            left++;
+                        }
+
+                        left++;
+                        right--;
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}
