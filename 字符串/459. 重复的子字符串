@@ -1,0 +1,32 @@
+
+//解法2: KMP算法
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        if(s.equals("")){
+            return false;
+        }
+        int len = s.length();
+        char[] ch = s.toCharArray();
+        int[] next = new int[len];
+        //1.初始化
+        int j = 0;
+        next[0] = 0;
+        for(int i = 1; i < len ; i++){
+            //2.匹配不成功，j回到前一位置next数组对应的值
+            while( j > 0 && ch[j] != ch[i]){
+                j = next[j - 1];
+            }
+            //3.匹配成功，j往后移
+            if(ch[j] == ch[i]){
+                j++;
+            }
+            //更新next的值
+            next[i] = j;
+        }
+        //通过 len即字符串长度 - next[len - 1]即最长相等前后缀 是否能被整除判断是否是重复子串
+        if(next[len - 1] > 0 && len % (len - next[len - 1]) == 0){
+            return true;
+        }
+        return false;
+    }
+}
