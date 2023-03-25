@@ -1,5 +1,11 @@
+//方法1: 移动匹配
+class Solution {
+    public boolean repeatedSubstringPattern(String s) {
+        return (s + s).indexOf(s, 1) != s.length();
+    }
+}
 
-//解法2: KMP算法
+//方法2: KMP算法
 class Solution {
     public boolean repeatedSubstringPattern(String s) {
         if(s.equals("")){
