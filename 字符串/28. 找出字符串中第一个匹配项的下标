@@ -1,0 +1,42 @@
+class Solution {
+    //前缀表(不减1)
+    public int strStr(String haystack, String needle) {
+        if(needle.length() == 0){
+            return 0;
+        }
+        int[] next = new int[needle.length()];
+        getNext(next, needle);
+
+        int j = 0;
+        for(int i = 0; i < haystack.length(); i++){
+            while( j > 0 && needle.charAt(j) != haystack.charAt(i)){
+                j = next[j - 1];
+            }
+            if(needle.charAt(j) == haystack.charAt(i)){
+                j++;
+            }
+            //当匹配到needle的末尾
+            if( j == needle.length()){
+                return i - needle.length() + 1;
+            }
+        }
+        return -1;
+    }
+    //KMP算法核心
+    private void getNext(int[] next, String s){
+        //1.对next数组初始化
+        int j = 0;
+        next[0] = 0;
+        for(int i = 1; i < s.length(); i++){
+            //2.处理前后缀不相同的情况
+            while( j > 0 && s.charAt(j) != s.charAt(i)){
+                j = next[j - 1];
+            }
+            //3.处理前后缀相同的情况
+            if( s.charAt(j) == s.charAt(i)){
+                j++;
+            }
+            next[i] = j;
+        }
+    }
+}
