@@ -14,3 +14,17 @@ class Solution {
     }
 }
 
+//方法2: 用 ^ 操作符实现交换
+class Solution {
+    public void reverseString(char[] s) {
+        int left = 0;
+        int right = s.length - 1;
+        while(left < right){
+            s[left] ^= s[right]; //构造 a^b 的结果并放在 a 中
+            s[right] ^= s[left]; //将 a^b 的结果 再 ^b, 并存放到 b 中，此时 b = a, a = a^b
+            s[left] ^= s[right]; // a^b 的结果再 ^a,存放到 a 中，此时 b = a; a = b 完成交换
+            left++;
+            right--;
+        }
+    }
+}
