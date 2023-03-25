@@ -1,0 +1,58 @@
+class Solution {
+    public String reverseWords(String s) {
+        char[] ch = s.toCharArray();
+        //1.去除首尾以及中间多余的空格
+        ch = removeExtraSpaces(ch);
+        //2.整个字符串反转
+        reverse(ch,0,ch.length - 1);
+        //3.单词反转
+        reverseEachWord(ch);
+        return new String(ch);
+    }
+    //1.用快慢指针去除首尾以及中间多余的空格，参考数组元素移除的题解
+    public char[] removeExtraSpaces(char[] ch){
+        int slow = 0;
+        for(int fast = 0; fast < ch.length; fast++){
+            //先用fast移除所有空格
+            if(ch[fast] != ' '){
+                //再用slow加空格. 除第一个单词外,单词末尾要加空格
+                if(slow != 0){
+                    ch[slow++] = ' ';
+                }
+                //fast遇到空格或遍历到字符串末尾就证明遍历完一个单词了
+                while(fast < ch.length && ch[fast] != ' '){
+                    ch[slow++] = ch[fast++];
+                }
+            }
+        }
+        char[] newCh = new char[slow];
+        System.arraycopy(ch,0,newCh,0,slow);
+        return newCh;
+    }
+    //2.双指针实现指定范围内字符串反转
+    public void reverse(char[] ch, int left, int right){
+        if(right >= ch.length){
+            System.out.println("Wrong index!");
+            return;
+        }
+        while(left < right){
+            ch[left] ^= ch[right];
+            ch[right] ^= ch[left];
+            ch[left] ^= ch[right];
+            left++;
+            right--;
+        }
+    }
+    //3.单词反转
+    public void reverseEachWord(char[] ch){
+        int start = 0;
+        //"end <= ch.length" 是为了让end永远指向每一个单词末尾的后一个位置，方便设置reverse参数
+        for(int end = 0; end <= ch.length; end++){
+            //end每次到单词末尾后的空格或字符串尾，开始反转单词
+            if(end == ch.length || ch[end] == ' '){
+                reverse(ch,start,end - 1);
+                start = end + 1;//重制start的位置
+            }
+        }
+    }
+}
