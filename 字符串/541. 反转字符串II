@@ -1,0 +1,19 @@
+class Solution {
+    public String reverseStr(String s, int k) {
+        char[] ch = s.toCharArray();//将字符串转换成char[]
+        //每隔2k个字符对前k个字符进行反转
+        for(int i = 0; i < ch.length; i += (2 * k)){
+            int left = i;
+            //判断尾数够不够k个取决于right指针的位置
+            int right = Math.min(ch.length - 1,left + k - 1);
+            while(left < right){
+                char temp = ch[left];
+                ch[left] = ch[right];
+                ch[right] = temp;
+                left++;
+                right--;
+            }
+        }
+        return new String(ch);
+    }
+}
