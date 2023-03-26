@@ -35,3 +35,37 @@ class MyStack {
 }
 
 //方法2: 单队列
+class MyStack {
+
+    Queue<Integer> queue;
+
+    public MyStack() {
+        queue = new LinkedList<>();
+    }
+    
+    public void push(int x) {
+        queue.offer(x);
+    }
+    
+    public int pop() {
+        int size = queue.size();
+        while(size-- > 1){
+            queue.offer(queue.poll());
+        }
+        return queue.poll();
+    }
+    
+    public int top() {
+        int size = queue.size();
+        while(size-- > 1){
+            queue.offer(queue.poll());
+        }
+        int peek = queue.peek();//找到peek
+        queue.offer(queue.poll());//还原队列，因为只是查看并没有弹出，不还原的话就改变了整个queue的结构
+        return peek;
+    }
+    
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
