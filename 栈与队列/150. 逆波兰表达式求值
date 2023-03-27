@@ -1,0 +1,22 @@
+class Solution {
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> stack = new LinkedList<>();
+        for(String s : tokens){
+            if("+".equals(s)){//加法操作
+                stack.push(stack.pop() + stack.pop());
+            }else if("-".equals(s)){//减法操作
+                stack.push(- stack.pop() + stack.pop());
+            }else if("*".equals(s)){//乘法操作
+                stack.push(stack.pop() * stack.pop());
+            }else if("/".equals(s)){//除法操作
+                int n2 = stack.pop();//除数
+                int n1 = stack.pop();//被除数
+                stack.push(n1 / n2);
+            }else{
+                stack.push(Integer.valueOf(s));
+            }
+        }
+        //最终stack中存放的是计算结果
+        return stack.pop();
+    }
+}
