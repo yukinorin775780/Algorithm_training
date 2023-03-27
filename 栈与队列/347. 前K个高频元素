@@ -1,0 +1,34 @@
+/* Comparator接口说明:
+返回负数，形参中第一个参数排在前面；返回正数，形参中第二个元素排在前面
+对于队列: 排在前面意味着往队头靠
+对于堆(使用PriorityQueue实现): 从队头到队尾按从小到大排就是小顶堆
+                             从队头到队尾按从大到小排就是大顶堆 ------>队头元素相当于堆的根结点
+*/
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        //key为数组元素值, val为对应出现的次数
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int num : nums){
+            map.put(num, map.getOrDefault(num , 0) + 1);
+        }
+        //在优先队列中存储二元组(num,cnt), 其中cnt表示元素值num在数组中出现的次数
+        //出现次数按从队头到队尾的顺序是从小到大排，出现次数最低的在队头(相当于小顶堆)
+        PriorityQueue<int []> pq = new PriorityQueue<>((pair1, pair2) -> pair1[1] - pair2[1]);
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()){//小顶堆只需要维持k个元素有序
+            if(pq.size() < k){//小顶堆元素个数小于k个时直接加
+                pq.add(new int[]{entry.getKey(), entry.getValue()});
+            }else{
+                if(entry.getValue() > pq.peek()[1]){//当前元素出现的次数大于小顶堆的根结点
+                    pq.poll();//弹出队头
+                    pq.add(new int[]{entry.getKey(), entry.getValue()});
+                }
+            }
+        }
+        int[] res = new int[k];
+        //依次弹出小顶堆,先弹出的是堆的根,出现次数少,后面弹出的出现次数多
+        for(int i = k - 1 ; i >= 0; i--){
+            res[i] = pq.poll()[0]; 
+        }
+        return res;
+    }
+}
