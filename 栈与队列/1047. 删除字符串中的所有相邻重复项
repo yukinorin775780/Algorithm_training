@@ -1,0 +1,45 @@
+//方法1: 使用栈
+class Solution {
+    public String removeDuplicates(String s) {
+        //ArrayDeque会比LinkedList在除了删除元素这一点外会快一点
+        ArrayDeque<Character> deque = new ArrayDeque<>();
+        char ch;
+        for(int i = 0; i<s.length(); i++){
+            ch = s.charAt(i);
+            if(deque.isEmpty() || deque.peek() != ch){
+                deque.push(ch);
+            }else{
+                deque.pop();
+            }
+        }
+        String str = "";
+        //栈中元素都是不重复元素
+        while(!deque.isEmpty()){
+            str = deque.pop() + str;
+        }
+        return str;
+    }
+}
+
+//方法2: 使用String当作栈
+class Solution {
+    public String removeDuplicates(String s) {
+        //将 res 当作栈
+        //使用StringBuilder来修改字符串，速度更快
+        StringBuilder res = new StringBuilder();
+        int top = -1;//res的长度
+        for(int i = 0; i<s.length(); i++){
+            char c = s.charAt(i);
+            //当top > 0时，即栈中有字符时，如果当前字符和栈中字符相等，弹出栈顶字符，同时 top--
+            if(top >= 0 && res.charAt(top) == c){
+                res.deleteCharAt(top);
+                top--;
+            //否则，将该字符串入栈，同时 top++
+            }else{
+                res.append(c);
+                top++;
+            }
+        }
+        return res.toString();
+    }
+}
