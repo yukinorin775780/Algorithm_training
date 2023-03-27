@@ -24,3 +24,7 @@
 ● 自己实现过程中遇到哪些困难或者错误：
 239. 核心思想: 单调队列中存放的是有可能成为最大值的元素。
 347. 为什么用到堆的数据结构？答: 因为要求的是前k个高频元素，没有必要把map中的所有元素进行排序，保留大小为k的堆进行排序(nlogk)的时间复杂度小于所有元素进行快排(nlogn). 注意使用的是小顶堆！
+     在答案中有很多看不懂的方法和功能map.getOrDefault(num,0)+1)、
+     PriorityQueue<int[]> pq = new PriorityQueue<>((pair1,pair2)->pair1[1]-pair2[1]);
+     Map.Entry<Integer,Integer> entry:map.entrySet()
+     需要去了解map的相关操作！！！
