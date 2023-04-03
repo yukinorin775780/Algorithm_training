@@ -1,0 +1,17 @@
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        inorder(root, res);
+        return res;
+    }
+
+    public void inorder(TreeNode root, List<Integer> res){
+        if(root == null){//终止条件
+            return;
+        }
+        //中序遍历的搜索逻辑是左中右
+        inorder(root.left, res);//左
+        res.add(root.val);//中
+        inorder(root.right, res);//右
+    }
+}
