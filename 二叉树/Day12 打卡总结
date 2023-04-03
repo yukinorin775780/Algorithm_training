@@ -1,12 +1,16 @@
 理论基础
 文章讲解: https://programmercarl.com/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80.html
+要精通怎么去定义一个二叉树。
+
 
 递归遍历 （必须掌握）
 题目链接: 
+144. 二叉树的前序遍历: https://leetcode.cn/problems/binary-tree-preorder-traversal/
+145. 二叉树的后序遍历: https://leetcode.cn/problems/binary-tree-postorder-traversal/
+94. 二叉树的中序遍历: https://leetcode.cn/problems/binary-tree-inorder-traversal/
 文章讲解/视频讲解: https://programmercarl.com/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%80%92%E5%BD%92%E9%81%8D%E5%8E%86.html
 
 迭代遍历 （基础不好的录友，迭代法可以放过）
-
 题目链接: 
 文章讲解/视频讲解: https://programmercarl.com/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E8%BF%AD%E4%BB%A3%E9%81%8D%E5%8E%86.html
 
@@ -19,6 +23,12 @@
 
 
 ● 看完代码随想录之后的想法：
-
+首先要能手写出二叉树的定义。
+其次要精通递归三要素，理清递归三要素可以更好的正确写出递归函数: 
+1. 确定递归函数的参数和返回值
+2. 确定终止条件
+3. 确定单层递归的逻辑
+递归遍历: 递归时的顺序由前中后序搜索顺序来决定，比如在前序遍历/中序遍历/后序遍历中，搜索逻辑是中左右/左中右/左右中，那么递归时单层递归的逻辑顺序就是搜索的逻辑。
 
 ● 自己实现过程中遇到哪些困难或者错误：
+
