@@ -1,3 +1,4 @@
+//方法1: 递归法
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> res = new ArrayList<>();
@@ -13,5 +14,60 @@ class Solution {
         inorder(root.left, res);//左
         res.add(root.val);//中
         inorder(root.right, res);//右
+    }
+}
+
+//方法2: 迭代法(含指针)
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        if(root == null){
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode cur = root; //指针指向当前指针
+        //中序遍历顺序是左中右 入栈顺序是先左后右
+        while(cur != null || !stack.isEmpty()){//当前结点不为空栈不为空
+            if(cur != null){//当前结点不为空
+                stack.push(cur);//把当前结点压入栈
+                cur = cur.left;//把当前结点的左结点赋给当前节点
+            }else{//当前结点为空
+                cur = stack.pop();//把栈顶元素赋给当前元素
+                res.add(cur.val);//返回当前结点的元素值
+                cur = cur.right;//把当前结点的右结点赋给当前结点
+            }
+        }
+        return res;
+    }
+}
+
+//方法3: 统一迭代法
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if(root != null){
+            stack.push(root);
+        }
+        while(!stack.isEmpty()){//当栈不为空时
+            TreeNode node = stack.peek();//把当前指针指向栈顶元素
+            if(node != null){//栈顶元素不为空时
+                stack.pop();//将该结点弹出，避免重复操作，下面再将右中左节点添加到栈中
+                if(node.right!=null){
+                    stack.push(node.right);//添加右结点
+                }
+                stack.push(node);//添加中结点
+                stack.push(null);//中结点访问过，但还没有处理，加入空结点做标记
+                if(node.left!=null){
+                    stack.push(node.left);//添加左结点
+                }
+            }else{//栈顶元素是空结点，才将下一个结点放入结果集
+                stack.pop();//弹出空结点
+                node = stack.peek();//重新取出栈顶结点
+                stack.pop();
+                res.add(node.val);//加入结果集
+            }
+        }
+        return res;
     }
 }
