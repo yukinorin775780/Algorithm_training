@@ -1,0 +1,20 @@
+class Solution {
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        Queue<TreeNode> que = new LinkedList<>();
+        if(root == null) return res;
+        que.offer(root);
+        while(!que.isEmpty()){
+            int size = que.size();
+            int max = Integer.MIN_VALUE;
+            while(size-- > 0){
+                TreeNode temp = que.poll();
+                max = Math.max(max, temp.val);
+                if(temp.left != null) que.offer(temp.left);
+                if(temp.right != null) que.offer(temp.right);
+            }
+            res.add(max);
+        }
+        return res;
+    }
+}
