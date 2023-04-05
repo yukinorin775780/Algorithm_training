@@ -1,0 +1,22 @@
+class Solution {
+    public int minDepth(TreeNode root) {
+        if(root == null) return 0;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        int depth = 0;
+        while(!que.isEmpty()){
+            int size = que.size();
+            depth++;
+            while(size-- > 0){
+                TreeNode cur = que.poll();
+                //当前结点的左右子结点都为空，直接返回最小深度
+                if(cur.left == null && cur.right == null){
+                    return depth;
+                }
+                if(cur.left != null) que.offer(cur.left);
+                if(cur.right != null) que.offer(cur.right);
+            }
+        }
+        return depth;
+    }
+}
