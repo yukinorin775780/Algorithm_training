@@ -1,0 +1,57 @@
+//方法1: 层序遍历(队列迭代)，翻转数组。
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> list = new ArrayList<>();
+        Deque<TreeNode> que = new LinkedList<>();
+
+        if(root == null){
+            return list;
+        }
+
+        que.offerLast(root);
+        while(!que.isEmpty()){
+            List<Integer> levelList = new ArrayList<>();
+            int levelSize = que.size();
+            while(levelSize > 0){
+                TreeNode peek = que.peekFirst();
+                levelList.add(que.pollFirst().val);
+                if(peek.left != null) que.offerLast(peek.left);
+                if(peek.right != null) que.offerLast(peek.right);
+                levelSize--;
+            }
+            list.add(levelList);
+            
+        }
+
+        List<List<Integer>> res = new ArrayList<>();
+        for(int i = list.size() - 1 ; i >= 0 ; i--){
+            res.add(list.get(i));
+        }
+        
+        return res;
+    }
+}
+
+//方法2:仍然是队列迭代的层序遍历，但是优化了收集答案的方式
+class Solution {
+    //利用链表可以进行O(1)头部插入，答案不用翻转
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        LinkedList<List<Integer>> res = new LinkedList<>();
+        Queue<TreeNode> que = new LinkedList<>();
+        if(root != null)
+            que.offer(root);
+
+        while(!que.isEmpty()){
+            List<Integer> levelList = new ArrayList<>();
+            int size = que.size();
+            while(size-- > 0){
+                TreeNode temp = que.poll();
+                levelList.add(temp.val);
+                if(temp.left != null) que.offer(temp.left);
+                if(temp.right != null) que.offer(temp.right);
+            }
+            res.addFirst(levelList);
+        }
+        return res;
+    }
+}
