@@ -41,7 +41,8 @@ class Solution {
                 if(node.left != null) que.add(node.left);
                 if(node.right != null) que.add(node.right);
             }
-            nodePre.next = null;//循环结束后即本层最后一个节点指向null
+            //这条语句可以省略，因为所有结点的next默认为null
+            //nodePre.next = null;//循环结束后即本层最后一个节点指向null
         }
         return root;
     }
