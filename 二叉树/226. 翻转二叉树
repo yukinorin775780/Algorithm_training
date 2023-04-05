@@ -36,3 +36,28 @@ class Solution {
         node.right = temp;
     }
 }
+
+//BFS-层序遍历
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) return null;
+        ArrayDeque<TreeNode> deque = new ArrayDeque<>();
+        deque.offer(root);
+        while(!deque.isEmpty()){
+            int size = deque.size();
+            while(size-- > 0){
+                TreeNode node = deque.poll();
+                swapChildren(node);
+                if(node.left != null) deque.offer(node.left);
+                if(node.right != null) deque.offer(node.right);
+            }
+        }
+        return root;
+    }
+
+    void swapChildren(TreeNode node){
+        TreeNode temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+    }
+}
