@@ -1,0 +1,38 @@
+//后序遍历
+class Solution {
+    //1.递归函数的参数和返回值
+    public TreeNode invertTree(TreeNode root) {
+        //2.终止条件
+        if(root == null) return null;
+        //3.单层递归逻辑: 先翻转左子树，再翻转右子树，最后在交换左右子结点。(后序遍历)
+        invertTree(root.left);
+        invertTree(root.right);
+        swapChildren(root);
+        return root;
+    }
+
+    void swapChildren(TreeNode node){
+        TreeNode temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+    }
+}
+//前序遍历
+class Solution {
+    //1.递归函数的参数和返回值
+    public TreeNode invertTree(TreeNode root) {
+        //2.终止条件
+        if(root == null) return null;
+        //3.单层递归逻辑: 先交换左右子结点，再翻转左子树，最后翻转右子树。(前序遍历)
+        swapChildren(root);
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
+
+    void swapChildren(TreeNode node){
+        TreeNode temp = node.left;
+        node.left = node.right;
+        node.right = temp;
+    }
+}
