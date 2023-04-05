@@ -5,6 +5,7 @@
 199.二叉树的右视图: https://leetcode.cn/problems/binary-tree-right-side-view/
 637.二叉树的层平均值: https://leetcode.cn/problems/average-of-levels-in-binary-tree/
 429.N叉树的层序遍历: https://leetcode.cn/problems/n-ary-tree-level-order-traversal/
+515.在每个树行中找最大值: https://leetcode.cn/problems/find-largest-value-in-each-tree-row/
 文章讲解/视频讲解: https://programmercarl.com/0102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.html
 
 226.翻转二叉树 (优先掌握递归)
@@ -21,6 +22,7 @@
 199. 无
 637. 层序遍历，内层循环时记录sum，每次内层循环结束后记录平均值(在外层循环内)。
 429. 层序遍历，内层循环中对每个结点的孩子进行循环。
+515. 层序遍历，内层循环中找最大值。
 226.
 101.
 
@@ -31,6 +33,7 @@
 199. 层序遍历的时候判断是否遍历到单层最后的元素，如果是就放入result数组。
 637. 思路一致。
 429. 思路一致。
+515. 思路一致。
 226. 
 101.
 
@@ -40,5 +43,6 @@
 199. size == 0 时 说明 队列已空，循环内弹出的元素为最后一个元素。
 637. 无
 429. 注意Node的结构，其中子节点是一个List.所以在判断是否有子结点时要注意语法。
+515. 循环内比较大小可以用 Math.max(xxx, xxx)取循环中的最大值。
 226. 
 101.
