@@ -6,6 +6,7 @@
 637.二叉树的层平均值: https://leetcode.cn/problems/average-of-levels-in-binary-tree/
 429.N叉树的层序遍历: https://leetcode.cn/problems/n-ary-tree-level-order-traversal/
 515.在每个树行中找最大值: https://leetcode.cn/problems/find-largest-value-in-each-tree-row/
+116.填充每个节点的下一个右侧节点指针: https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/
 文章讲解/视频讲解: https://programmercarl.com/0102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.html
 
 226.翻转二叉树 (优先掌握递归)
@@ -23,6 +24,7 @@
 637. 层序遍历，内层循环时记录sum，每次内层循环结束后记录平均值(在外层循环内)。
 429. 层序遍历，内层循环中对每个结点的孩子进行循环。
 515. 层序遍历，内层循环中找最大值。
+116. 层序遍历...
 226.
 101.
 
@@ -34,6 +36,7 @@
 637. 思路一致。
 429. 思路一致。
 515. 思路一致。
+116. 层序遍历，在单层遍历的时候记录下本层的头部结点，然后在遍历的时候让前一个结点指向本结点。
 226. 
 101.
 
@@ -44,5 +47,6 @@
 637. 无
 429. 注意Node的结构，其中子节点是一个List.所以在判断是否有子结点时要注意语法。
 515. 循环内比较大小可以用 Math.max(xxx, xxx)取循环中的最大值。
+116. 理解: 在循环中有右侧结点的结点的next会指向右侧结点，但没有右侧结点的就没有修改即为null，因为所有next指针初始化为null。
 226. 
 101.
