@@ -1,0 +1,23 @@
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        Deque<TreeNode> que = new LinkedList<>();
+
+        if(root == null) return list;
+
+        que.offerLast(root);
+        while(!que.isEmpty()){
+            int size = que.size();
+            while(size-- > 0){
+                TreeNode temp = que.pollFirst();
+                if(temp.left != null) que.offerLast(temp.left);
+                if(temp.right != null) que.offerLast(temp.right);
+
+                if(size == 0){ //如果是此高度的最后一个元素
+                    list.add(temp.val);
+                }
+            }
+        }
+        return list;
+    }
+}
