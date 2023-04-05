@@ -2,7 +2,8 @@
 题目链接:
 102.二叉树的层序遍历: https://leetcode.cn/problems/binary-tree-level-order-traversal/
 107.二叉树的层序遍历II: https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/
-199. 二叉树的右视图: https://leetcode.cn/problems/binary-tree-right-side-view/
+199.二叉树的右视图: https://leetcode.cn/problems/binary-tree-right-side-view/
+637.二叉树的层平均值: https://leetcode.cn/problems/average-of-levels-in-binary-tree/
 文章讲解/视频讲解: https://programmercarl.com/0102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.html
 
 226.翻转二叉树 (优先掌握递归)
@@ -14,23 +15,26 @@
 文章讲解/视频讲解: https://programmercarl.com/0101.%E5%AF%B9%E7%A7%B0%E4%BA%8C%E5%8F%89%E6%A0%91.html
 
 ● 自己看到题目的第一想法：
-102.无
-107.无
-199.无
+102. 无
+107. 无
+199. 无
+637. 层序遍历，内层循环时记录sum，每次内层循环结束后记录平均值(在外层循环内)。
 226.
 101.
 
 ● 看完代码随想录之后的想法：
 层序遍历: 通过队列的形式外循环条件是队列不为空，把每一高度的元素录入，录入后记录size，并用size作为循环条件一边出队记录一边将出队元素的左子结点和右子结点记录入队，size=0即当前高度的所有结点已经记录入队后结束内循环。
-102.层序遍历输出结果即可。
-107.层序遍历记录结果后翻转即可。
-199.层序遍历的时候判断是否遍历到单层最后的元素，如果是就放入result数组。
-226.
+102. 层序遍历输出结果即可。
+107. 层序遍历记录结果后翻转即可。
+199. 层序遍历的时候判断是否遍历到单层最后的元素，如果是就放入result数组。
+637. 思路一致。
+226. 
 101.
 
 ● 自己实现过程中遇到哪些困难或者错误：
 102. 内外双循环，注意每个循环条件。
 107. 当内循环使用while(size > 0)时要谨记循环内需要 size--;
 199. size == 0 时 说明 队列已空，循环内弹出的元素为最后一个元素。
+637. 无
 226. 
 101.
