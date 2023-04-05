@@ -8,6 +8,7 @@
 515.在每个树行中找最大值: https://leetcode.cn/problems/find-largest-value-in-each-tree-row/
 116.填充每个节点的下一个右侧节点指针: https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/
 117.填充每个结点的下一个右侧结点指针II: https://leetcode.cn/problems/populating-next-right-pointers-in-each-node-ii/
+104.二叉树的最大深度: https://leetcode.cn/problems/maximum-depth-of-binary-tree/
 文章讲解/视频讲解: https://programmercarl.com/0102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.html
 
 226.翻转二叉树 (优先掌握递归)
@@ -27,6 +28,7 @@
 515. 层序遍历，内层循环中找最大值。
 116. 层序遍历...
 117. 层序遍历，与116无差别。
+104. 层序遍历，内循环深度++。
 226. 
 101.
 
@@ -40,6 +42,7 @@
 515. 思路一致。
 116. 层序遍历，在单层遍历的时候记录下本层的头部结点，然后在遍历的时候让前一个结点指向本结点。
 117. 如果用的是层序遍历的方法，和116无差别。因为无论是否为完整二叉树层序遍历都会遍历到每一层的每个结点。
+104. 思路一致。
 226. 
 101.
 
@@ -52,5 +55,6 @@
 515. 循环内比较大小可以用 Math.max(xxx, xxx)取循环中的最大值。
 116. 理解: 在循环中有右侧结点的结点的next会指向右侧结点，但没有右侧结点的就没有修改即为null，因为所有next指针初始化为null。
 117. 116和117的解题可以互相转换。因为都是树的层序遍历。
+104. 无
 226. 
 101.
