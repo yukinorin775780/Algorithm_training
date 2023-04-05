@@ -1,0 +1,70 @@
+//方法1: 递归法
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return compare(root.left, root.right);
+    }
+    //1.递归函数的参数和返回值
+    private boolean compare(TreeNode left, TreeNode right){
+        //2.终止条件
+        if(left == null && right != null)//左为空,右不为空
+            return false;
+        if(left != null && right == null)//右为空,左不为空
+            return false;
+        if(left == null && right == null)//左为空,右为空
+            return true;
+        if(left.val != right.val)//左和右的值不相等
+            return false;
+        //此时就是：左右子结点皆不为空且数值相同的情况
+        //比较外侧即左子树的左子结点与右子树的右子结点比较
+        boolean outside = compare(left.left, right.right);
+        //比较内侧即左子树的右子结点与右子树的左子结点比较
+        boolean inside = compare(left.right, right.left); 
+        return outside && inside;   
+    }
+}
+
+//方法2: 迭代法(普通队列)
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root.left);
+        que.offer(root.right);
+        while(!que.isEmpty()){
+            TreeNode leftNode = que.poll();
+            TreeNode rightNode = que.poll();
+            if(leftNode == null && rightNode == null){
+                continue;
+            }
+            if(leftNode == null && rightNode != null) return false;
+            if(leftNode != null && rightNode == null) return false;
+            if(leftNode.val != rightNode.val) return false;
+            
+            que.offer(leftNode.left);
+            que.offer(rightNode.right);
+            que.offer(leftNode.right);
+            que.offer(rightNode.left);
+        }
+        return true;
+    }
+}
+//方法3: 双端队列(相当于两个栈)
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        Deque<TreeNode> deque = new LinkedList<>();
+        deque.offerFirst(root.left);
+        deque.offerLast(root.right);
+        while(!deque.isEmpty()){
+            TreeNode leftNode = deque.pollFirst();
+            TreeNode rightNode = deque.pollLast();
+            if(leftNode == null && rightNode == null) continue;
+            if(leftNode == null || rightNode == null || leftNode.val != rightNode.val)
+                return false;
+            deque.offerFirst(leftNode.left);
+            deque.offerFirst(leftNode.right);
+            deque.offerLast(rightNode.right);
+            deque.offerLast(rightNode.left);
+        }
+        return true;
+    }
+}
+
