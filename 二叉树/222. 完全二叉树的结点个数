@@ -18,6 +18,7 @@ class Solution {
         if(leftDepth == rightDepth){
             return (2 << leftDepth) - 1; // 2<<1 相当于 2^2，所以初始值为0
         }
+        //3.单层递归的逻辑
         return countNodes(root.left) + countNodes(root.right) + 1;
     }
 }
