@@ -1,3 +1,4 @@
+//方法1: 前序遍历 + 回溯
 class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> res = new ArrayList<>(); //存放最终结果
@@ -31,5 +32,35 @@ class Solution {
             paths.remove(paths.size() - 1); //回溯
         }
     }
+}
 
+//方法2: 迭代法 
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList<>();
+        if(root == null) return res;
+        Stack<Object> stack = new Stack<>();
+        //结点和路径同时入栈
+        stack.push(root);
+        stack.push(root.val + "");
+        while(!stack.isEmpty()){
+            //结点和路径同时出栈
+            String path = (String) stack.pop();
+            TreeNode node = (TreeNode) stack.pop();
+            //若找到叶子结点
+            if(node.left == null && node.right == null){
+                res.add(path);
+            }
+            //右子结点不为空
+            if(node.right != null){
+                stack.push(node.right);
+                stack.push(path + "->" + node.right.val);
+            }
+            if(node.left != null){
+                stack.push(node.left);
+                stack.push(path + "->" + node.left.val);
+            }
+        }
+        return res;
+    }
 }
