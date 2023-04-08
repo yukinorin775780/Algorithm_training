@@ -26,3 +26,33 @@ class Solution {
         return false;
     }
 }
+
+//方法2: 迭代法 层序遍历 + 栈
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if(root == null) return false;
+        Stack<TreeNode> st = new Stack<>(); //记录结点
+        Stack<Integer> si = new Stack<>(); //记录从头结点到该结点的路径数值总和
+        st.push(root);
+        si.push(root.val);
+        while(!st.isEmpty()){
+            int size = st.size();
+            while(size-- > 0){
+                TreeNode cur = st.pop();
+                int sum = si.pop();
+                //如果该结点是叶子结点，同时该结点的路径数值=sum,返回true
+                if(cur.left == null && cur.right == null && sum == targetSum) return true;
+                //栈结构 先右后左并记录该结点的路径数值和
+                if(cur.right != null){
+                    st.push(cur.right);
+                    si.push(cur.right.val + sum);
+                }
+                if(cur.left != null){
+                    st.push(cur.left);
+                    si.push(cur.left.val + sum);
+                }
+            }
+        }
+        return false;
+    }
+}
