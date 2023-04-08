@@ -1,0 +1,33 @@
+//方法1: 递归法
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+        List<List<Integer>> res = new ArrayList<>();
+        if(root == null) return res; //非空判断
+        
+        List<Integer> path = new ArrayList<>();
+        preorderdfs(root, targetSum, res, path);
+        return res;
+    }
+
+    public void preorderdfs(TreeNode root, int targetsum, List<List<Integer>> res, List<Integer> path){
+        path.add(root.val);
+        //遇到叶子结点
+        if(root.left == null && root.right == null){
+            //找到了sum == targetsum 的路径
+            if(targetsum - root.val == 0){
+                res.add(new ArrayList<>(path));
+            }
+            return;//如果sum != targetsum ，返回
+        }
+        if(root.left != null){ //左
+            //递归 回溯逻辑是targetSum - root.val并没有改变targetsum的值
+            preorderdfs(root.left, targetsum - root.val, res, path);
+            path.remove(path.size() - 1); //回溯 path路径回溯
+        }
+        if(root.right != null){ //右
+            //与左递归逻辑一致
+            preorderdfs(root.right, targetsum - root.val, res, path);
+            path.remove(path.size() - 1);
+        }
+    }
+}
