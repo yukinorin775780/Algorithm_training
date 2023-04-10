@@ -1,0 +1,56 @@
+//方法1: 递归 中序遍历
+class Solution {
+    TreeNode pre;
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        boolean left = isValidBST(root.left); //左
+        if(!left){ //左子树返回值为false
+            return false;
+        }
+        //中
+        if(pre != null && pre.val >= root.val){
+            return false;
+        }
+        pre = root;
+        boolean right = isValidBST(root.right); //右
+        return right;//遍历到最后
+    }
+}
+
+//方法2: 迭代 中序遍历
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pre = null;
+        while(root != null || !stack.isEmpty()){
+            while(root != null){
+                stack.push(root);
+                root = root.left;//左
+            }
+            //中
+            TreeNode cur = stack.pop();
+            if(pre != null && pre.val >= cur.val){
+                return false;
+            }
+            pre = cur;
+            root = cur.right;//右
+        }
+        return true;
+    }
+}
+
+//方法3: 中序遍历 利用pre = Long.MIN_VALUE比较
+class Solution {
+    private long pre = Long.MIN_VALUE;
+    public boolean isValidBST(TreeNode root) {
+        if(root == null) return true;
+        if(!isValidBST(root.left)) return false;//左
+        //中
+        if(pre >= root.val){ //不满足BST
+            return false;
+        }
+        pre = root.val;
+        return isValidBST(root.right);//右
+    }
+}
