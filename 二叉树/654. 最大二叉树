@@ -1,0 +1,32 @@
+class Solution {
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return construct(nums, 0, nums.length);
+    }
+
+    //1.递归函数的参数和返回值
+    public TreeNode construct(int[] nums, int leftIndex, int rightIndex){
+        //2.终止条件
+        if(rightIndex - leftIndex < 1){ //没有元素
+            return null;
+        }
+        if(rightIndex - leftIndex == 1){ //只有一个元素
+            return new TreeNode(nums[leftIndex]);
+        }
+        //3.单层逻辑: 前序遍历
+        int maxIndex = leftIndex;//最大值所在的索引
+        int maxVal = nums[maxIndex];//最大值
+        //1)先找到数组中最大值和对应的下标，最大的值构造根结点，下标用来分割数组
+        for(int i = leftIndex + 1; i < rightIndex; i++){
+            if(nums[i] > maxVal){
+                maxVal = nums[i];
+                maxIndex = i;
+            }
+        }
+        TreeNode root = new TreeNode(maxVal);
+        //2)最大值所在的下标左区间 构造左子树 
+        root.left = construct(nums, leftIndex, maxIndex);
+        //3) 最大值所在的下标有区间 构造右子树 
+        root.right = construct(nums, maxIndex + 1, rightIndex);
+        return root;
+    }
+}
