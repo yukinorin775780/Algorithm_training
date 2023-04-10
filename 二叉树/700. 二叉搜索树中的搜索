@@ -1,0 +1,63 @@
+//方法1: 普通迭代法 层序遍历
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null || root.val == val) return root;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        while(!que.isEmpty()){
+            TreeNode cur = que.poll();
+            if(cur.val == val){
+                return cur;
+            }
+            if(cur.left != null) que.offer(cur.left);
+            if(cur.right != null) que.offer(cur.right);
+        }
+        return null;
+    }
+}
+
+//方法2: 特殊迭代法(依照BST的性质，通过比较val的大小来减少遍历次数)
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) {
+        if(root == null || root.val == val) return root;
+        Queue<TreeNode> que = new LinkedList<>();
+        que.offer(root);
+        while(!que.isEmpty()){
+            TreeNode cur = que.poll();
+            if(cur.val == val){
+                return cur; 
+            }else if(cur.val < val){
+                if(cur.right != null)
+                    que.offer(cur.right);
+            }else{
+                if(cur.left != null)
+                    que.offer(cur.left);
+            }
+        }
+        return null;
+    }
+}
+
+//方法3: 特殊迭代法，利用二叉树的特点不需要用到队列等数据结构
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) { 
+        while(root != null){
+            if(val < root.val) root = root.left;
+            else if(val > root.val) root = root.right;
+            else return root;
+        }
+        return null;
+    }
+}
+
+//方法4: 递归法，利用BST的特点
+class Solution {
+    public TreeNode searchBST(TreeNode root, int val) { 
+        if(root == null || root.val == val) return root;
+        if( val < root.val){
+            return searchBST(root.left, val);
+        } else{
+            return searchBST(root.right, val);
+        }
+    }
+}
