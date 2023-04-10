@@ -4,7 +4,7 @@
 视频讲解: https://www.bilibili.com/video/BV1MG411G7ox
 
 617.合并二叉树
-题目链接: 
+题目链接: https://leetcode.cn/problems/merge-two-binary-trees/
 文章讲解: https://programmercarl.com/0617.%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91.html
 视频讲解: https://www.bilibili.com/video/BV1m14y1Y7JK
 
@@ -20,7 +20,7 @@
 
 ● 自己看到题目的第一想法：
 654. 找到数组中最大值，一分为二，在左右两边数组中在找到最大值，递归结束条件是当前数组的大小等于1. 但是怎么构造成二叉树不会。
-617. 
+617. 迭代法 层序遍历，同时层序遍历两棵树。
 700. 
 98. 
 
