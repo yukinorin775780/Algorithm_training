@@ -1,5 +1,5 @@
 530.二叉搜索树的最小绝对差
-题目链接: 
+题目链接: https://leetcode.cn/problems/minimum-absolute-difference-in-bst/submissions/
 文章讲解: https://programmercarl.com/0530.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE.html
 视频讲解: https://www.bilibili.com/video/BV1DD4y11779
 
@@ -19,11 +19,11 @@
 236.
 
 ● 看完代码随想录之后的想法：
-530.
+530. 通过双指针(当前结点-之前结点)来实现，不需要另外开辟一个ArrayList空间。主要的逻辑点在于在中的逻辑中需要 pre = cur; 来保证上一个结点紧跟着当前结点。
 501.
 236.
 
 ● 自己实现过程中遇到哪些困难或者错误：
-530.
+530. 无
 501.
 236.
