@@ -1,0 +1,122 @@
+//方法1: 中序遍历 利用二叉搜索树性质 不使用额外空间
+class Solution {
+    ArrayList<Integer> resList;
+    int maxCount;
+    int count;
+    TreeNode pre;
+    public int[] findMode(TreeNode root) {
+        //初始化
+        resList = new ArrayList<Integer>();
+        maxCount = 0;
+        count = 0;
+        pre = null; 
+        inorderFindNode(root);
+        int[] res = new int[resList.size()];
+        for(int i = 0; i < resList.size() ; i++){
+            res[i] = resList.get(i);
+        }
+        return res;
+    }
+
+    public void inorderFindNode(TreeNode root){
+        if(root == null) return;
+        //左
+        inorderFindNode(root.left);
+        //中
+        if(pre == null || root.val != pre.val){//前一个结点为空 或 当前结点值!=前一个结点值
+            count = 1;
+        }else{//当前结点值 = 上一个结点值
+            count++;
+        }
+        pre = root; //更新上一个结点
+        //更新结果集以及maxCount
+        if(count > maxCount){ //当前频率 > 最大频率
+            maxCount = count;
+            resList.clear();//清空结果集
+            resList.add(root.val);//添加当前结点值
+        }else if(count == maxCount){ //当前频率 == 最大频率
+            resList.add(root.val);//添加当前结点值
+        }
+        //右
+        inorderFindNode(root.right);
+    }
+}
+
+/方法2: 迭代法 中序遍历
+class Solution {
+    public int[] findMode(TreeNode root) {
+        //初始化
+        TreeNode pre = null;
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> res = new ArrayList<>();
+        int maxCount = 0;
+        int count = 0;
+        TreeNode cur = root;
+        while(cur != null || !stack.isEmpty()){
+            if(cur != null) {
+                stack.push(cur);
+                //左
+                cur = cur.left;
+            }else{
+                //中
+                cur = stack.pop();
+                if(pre == null || cur.val != pre.val){//当前结点值 != 前一个结点值
+                    count = 1;
+                }else{//当前结点值 = 前一个结点值
+                    count++;
+                }
+                pre = cur;//更新上一个结点
+                //更新结果集
+                if(count > maxCount){//当前频率 > 最大频率
+                    maxCount = count;
+                    res.clear();
+                    res.add(cur.val);
+                }else if(count == maxCount){//当前频率 == 最大频率
+                    res.add(cur.val);
+                }
+                //右
+                cur = cur.right;
+            }
+        }
+        return res.stream().mapToInt(Integer::intValue).toArray();
+        /*
+        解释:
+        stream()方法为集合创建串行流
+        mapToInt()方法是将Stream中的元素转换为int类型
+        toArray()方法将ArrayList对象转换为数组
+        */
+    }
+}
+
+//方法3: 暴力检索 通过map记录频率，再把频率最高的放入结果集
+class Solution {
+    public int[] findMode(TreeNode root) {
+        Map<Integer, Integer> map = new HashMap<>();
+        List<Integer> list = new ArrayList<>();
+        if(root == null){
+            return list.stream().mapToInt(Integer::intValue).toArray();
+        }
+        //获得频率map
+        searchBST(root, map);
+        List<Map.Entry<Integer, Integer>> mapList = map.entrySet().stream().
+                sorted((c1,c2) -> c2.getValue().compareTo(c1.getValue())).
+                collect(Collectors.toList());
+        list.add(mapList.get(0).getKey());
+        //把频率最高的加入list
+        for(int i = 1; i < mapList.size(); i++){
+            if(mapList.get(i).getValue() == mapList.get(i-1).getValue()){
+                list.add(mapList.get(i).getKey());
+            }else{
+                break;
+            }
+        }
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+    void searchBST(TreeNode curr, Map<Integer, Integer> map){
+        if(curr == null) return;
+        map.put(curr.val, map.getOrDefault(curr.val, 0) + 1);
+        searchBST(curr.left, map);
+        searchBST(curr.right, map);
+    }
+}
