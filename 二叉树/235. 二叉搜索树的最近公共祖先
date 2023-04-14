@@ -1,0 +1,31 @@
+//方法1: 递归法
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root == null) return root;
+        if(root.val > p.val && root.val > q.val){//当前结点的值大于p和q的值
+            TreeNode left = lowestCommonAncestor(root.left, p, q);//p和q都在左子树中 遍历
+            if(left != null) return left;
+        }else if(root.val < p.val && root.val < q.val){//当前结点的值小于p和q的值
+            TreeNode right = lowestCommonAncestor(root.right, p, q);//p和q都在右子树 遍历
+            if(right != null) return right;
+        }
+        //p<结点值<q 或 q<结点值<p
+        return root;
+    }
+}
+
+//方法2: 递归法
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        while(true){
+            if(root.val > p.val && root.val > q.val){
+                root = root.left;
+            }else if(root.val < p.val && root.val < q.val){
+                root = root.right;
+            }else{
+                break;
+            }
+        }
+        return root;
+    }
+}
