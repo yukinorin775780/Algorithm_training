@@ -1,0 +1,25 @@
+class Solution {
+    public TreeNode deleteNode(TreeNode root, int key) {
+        if(root == null) return null;//1.没有找到要删除的结点:返回null
+        if(root.val == key){
+            if(root.left == null && root.right == null){//2.找到的结点是叶子结点:直接删除
+                return null;//返回空结点
+            }else if(root.left != null && root.right == null){//3.找到的结点左不空右空:让其父结点直接指向其左节点
+                return root.left;//返回左子树
+            }else if(root.left == null && root.right != null){//4.找到的结点左空右不空:让其父结点直接指向其右结点
+                return root.right;//返回右子树
+            }else{ //找到的结点左不空右不空: 将其左子树安在右子树最左下角, 直接将其父结点指向其右子树
+                TreeNode cur = root.right;
+                while(cur.left != null){//找到适合左子树的位置，即右子树的最左下叶子结点
+                    cur = cur.left;
+                }
+                cur.left = root.left;
+                return root.right; //返回右子树
+            }
+        }
+        if(key < root.val) root.left = deleteNode(root.left, key);//用根结点的左子树接住修改后的左子树
+        if(key > root.val) root.right = deleteNode(root.right, key);//用根结点的右结点接住修改后的右子树
+
+        return root;
+    }
+}
