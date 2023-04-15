@@ -1,0 +1,20 @@
+class Solution {
+    int pre = 0;
+    public TreeNode convertBST(TreeNode root) {
+        traversal(root);
+        return root;
+    }
+    //1.递归函数参数以及返回值
+    private void traversal(TreeNode cur){
+        //2.终止条件
+        if(cur == null) return;
+        //3.单层递归的逻辑: 反向中序遍历 右中左
+        //右
+        traversal(cur.right);
+        //中
+        cur.val += pre;//累加
+        pre = cur.val;//更新pre的位置
+        //左
+        traversal(cur.left);
+    }
+}
