@@ -1,0 +1,20 @@
+class Solution {
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+        if(root == null) return null;
+        if(root.val < low){//当前结点值 < low
+            //在当前结点的右子树中寻找符合[low,high]的结点
+            TreeNode right = trimBST(root.right,low,high);
+            return right;
+        }
+        if(root.val > high){//当前结点值 > high
+            //在当前结点的左子树中寻找符合[low,high]的结点
+            TreeNode left = trimBST(root.left,low,high);
+            return left;
+        }
+        //root.left 接住符合要求的左子树
+        root.left = trimBST(root.left,low,high);
+        //root.right 接住符合要求的右子树
+        root.right = trimBST(root.right,low,high);
+        return root; 
+    }
+}
