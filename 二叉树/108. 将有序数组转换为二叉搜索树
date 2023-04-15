@@ -1,0 +1,15 @@
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        return traversal(nums, 0, nums.length - 1);
+    }
+
+    //区间左闭右闭[]
+    private TreeNode traversal(int[] nums, int left, int right){
+        if(left > right) return null;
+        int mid = left + ((right - left) >> 1);
+        TreeNode root = new TreeNode(nums[mid]);//创建中间结点
+        root.left = traversal(nums,left,mid-1);//左子树
+        root.right = traversal(nums,mid+1,right);//右子树
+        return root;
+    }
+}
