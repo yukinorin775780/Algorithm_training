@@ -1,14 +1,29 @@
 669. 修剪二叉搜索树
-题目链接:
+题目链接: https://leetcode.cn/problems/trim-a-binary-search-tree/
 文章讲解: https://programmercarl.com/0669.%E4%BF%AE%E5%89%AA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html
 视频讲解: https://www.bilibili.com/video/BV17P41177ud
 
 108. 将有序数组转换为二叉搜索树
-题目链接:
+题目链接: 
 文章讲解: https://programmercarl.com/0108.%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html
 视频讲解: https://www.bilibili.com/video/BV1uR4y1X7qL
 
 538.把二叉搜索树转换为累加树
-题目链接:
+题目链接: 
 文章讲解: https://programmercarl.com/0538.%E6%8A%8A%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BD%AC%E6%8D%A2%E4%B8%BA%E7%B4%AF%E5%8A%A0%E6%A0%91.html
 视频讲解: https://www.bilibili.com/video/BV1d44y1f7wP
+
+● 自己看到题目的第一想法：
+669. 直接在树上操作感觉十分复杂，要考虑的情况很多。所以第一想法是通过中序遍历获得[low, high]之间的数组再将数组重构成二叉搜索树。
+108. 
+538. 
+
+● 看完代码随想录之后的想法：
+669. 通过遍历找到了的结点< low 时，需要向此结点的右结点开始遍历，返回修剪过的右子树；如果结点值 > high，需要向此结点的左子树遍历，返回修剪过的左子树。
+108. 
+538. 
+
+● 自己实现过程中遇到哪些困难或者错误：
+669. 代码看似简单，但其中有许多巧思。要理清整体代码的逻辑。
+108. 
+538. 
