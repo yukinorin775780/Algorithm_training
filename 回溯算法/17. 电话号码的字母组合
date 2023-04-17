@@ -1,0 +1,30 @@
+class Solution {
+    List<String> list = new ArrayList<>();//结果集
+    public List<String> letterCombinations(String digits) {
+        if(digits == null || digits.length() == 0)
+            return list;
+        //初始对应所有的数字，直接对应2-9，增加了两个无效字符串
+        String[] numString = {"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        backtracking(digits, numString, 0);
+        return list;
+    }
+
+    //高效字符串拼接
+    StringBuilder temp = new StringBuilder();
+    //1.
+    private void backtracking(String digits, String[] numString,int index){
+        //2.终止条件
+        if(index == digits.length()){
+            list.add(temp.toString());
+            return;
+        }
+        String str = numString[digits.charAt(index) - '0'];//表示当前num对应的字符串
+        //3.单层循环逻辑
+        for(int i = 0; i < str.length(); i++){
+            temp.append(str.charAt(i));
+            backtracking(digits, numString, index+1);
+            //回溯
+            temp.deleteCharAt(temp.length() - 1);
+        }
+    }
+}
