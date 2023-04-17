@@ -23,7 +23,7 @@
      举个例子: 如果k=2,path.size() = 0时，那么 9-(2-0)+1=8. i<=8 意味着 i取到8时才能保证后面还有足够的元素可以取。如果可以取到的元素不够就不用循环，剪枝。
 17. 每次做回溯算法题目时，都要弄清楚树的深度和宽度由什么来决定。比如这题树的深度是由输入数字的个数决定，树的宽度是由每个数字代表多少个字母来决定。回溯三部曲:
      1.确定递归函数参数: 数字组合String digits, 当前递归遍历到 index 个数字
-     2.确定终止条件: index == digits.size()时结束，将单条路径收获的StringBuilder temp 放入结果集。
+     2.确定终止条件: index == digits.length()时结束，将单条路径收获的StringBuilder temp 放入结果集。
      3.单层搜索过程: 首先先取出数字 digits.charAt[index] - '0'; 并找到对应的字符串 String str = numString[digits.charAt[index] - '0']; for循环从0开始到 str.length(); 添加当前到temp路径，递归，回溯。
 
 ● 自己实现过程中遇到哪些困难或者错误：
