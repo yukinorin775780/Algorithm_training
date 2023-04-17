@@ -1,0 +1,29 @@
+class Solution {
+    List<List<Integer>> result = new ArrayList<>(); //收集结果集
+    LinkedList<Integer> path = new LinkedList<>(); //收集一条结果
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        backtracking(k,n,1,0);
+        return result;
+    }
+    //1.递归函数参数
+    private void backtracking(int k, int n, int startIndex, int sum){
+        //2.终止条件
+        if(sum > n) return;//剪枝: 和已经大于n就返回
+        if(path.size() == k){//已经取到足够的元素
+            if(sum == n) {//相等就添加到结果集
+                result.add(new ArrayList<>(path));
+            }
+            return;
+        }
+        //3.单层搜索过程
+        for(int i = startIndex ; i <= 9 - (k - path.size()) + 1; i++){//剪枝: i <= 9 - (k - path.size()) + 1
+            sum += i;
+            path.add(i);
+            backtracking(k,n,i+1,sum);
+            //回溯
+            path.removeLast();
+            //回溯
+            sum -= i;
+        }
+    }
+}
