@@ -28,6 +28,6 @@
 131. 
 
 ● 自己实现过程中遇到哪些困难或者错误：
-39. 
+39. result.add(new ArrayList<>(path)); 不能是 result.add(path)
 40. 
 131. 
