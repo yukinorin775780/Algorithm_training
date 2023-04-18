@@ -1,0 +1,25 @@
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    List<Integer> path = new ArrayList<>();
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);//排序后方便剪枝操作
+        backtracking(result, path, candidates, target, 0, 0);
+        return result;
+    }
+
+    private void backtracking(List<List<Integer>> result, List<Integer> path, int[] candidates, int target, int sum, int startIndex){
+        if(sum == target){//找到数字和=target的组合
+            result.add(new ArrayList<>(path));
+            return;
+        }
+        for(int i = startIndex; i < candidates.length ; i++){
+            //如果 sum + candidates[i] > target 就停止遍历
+            if(sum + candidates[i] > target) break;
+            path.add(candidates[i]);
+            //startIndex = i 的原因是因为要保证从起始位置开始遍历可以得到重复的结果
+            backtracking(result, path, candidates, target, sum + candidates[i], i);
+            //回溯
+            path.remove(path.size() - 1);
+        }
+    } 
+}
