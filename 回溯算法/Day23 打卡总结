@@ -13,4 +13,21 @@
 文章讲解: https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html
 视频讲解: https://www.bilibili.com/video/BV1c54y1e7k6
 
+● 自己看到题目的第一想法：
+39. 根据题意可得树的宽度是有整数数组的大小来决定，而树的深度是有目标整数来决定。元素可以重复使用说明for循环的startIndex是与77.组合不同的。具体如何实现不太清楚。
+40. 
+131. 
 
+● 看完代码随想录之后的想法：
+39. 与组合问题差异是在剩余集合中需要带入原来的选取过的元素才能达成重复使用数字的目的。回溯三部曲:
+    1.递归函数参数: 参数需要两个全局变量 一个二维数组存放结果集，一个一维数组存放单个结果，返回值是void，参数有题目中的 candidate 和 target，以及自定义的 sum 遍历过元素的和 startIndex 用来确定for循环搜索的起始点。
+    2.递归终止条件: sum > target return; sum == target 找到了一个目标数组，result中记录path return;
+    3.单层循环逻辑: for循环 i 从 startIndex 开始， i < 数组的大小 ; i++ {元素 i 放入 path；累加sum；递归；回溯(弹出i和sum-=i)} 
+    剪枝操作: 可以对candidates数组进行排序，如果sum + candidates[i] 已经大于 target 时，就没有必要继续往下遍历了，所以在for循环中可以添加判断 sum + candidates[i] <= target 
+40. 
+131. 
+
+● 自己实现过程中遇到哪些困难或者错误：
+39. 
+40. 
+131. 
