@@ -1,0 +1,39 @@
+class Solution {
+    List<List<String>> result = new ArrayList<>();
+    Deque<String> deque = new LinkedList<>();
+    public List<List<String>> partition(String s) {
+        backtracking(s,0);
+        return result;
+    }
+
+    private void backtracking(String s, int startIndex){
+        //起始位置 > s.length() 说明到了叶子结点，找到了一组分割方法
+        if(startIndex >= s.length()){
+            result.add(new ArrayList(deque));
+            return;
+        }
+        for(int i = startIndex; i < s.length(); i++){
+            //如果是回文串，记录
+            if(isPalindrome(s,startIndex,i)){
+                String str = s.substring(startIndex,i+1);
+                deque.addLast(str);
+            }else{//如果不是回文串，跳过
+                continue;
+            }
+            //起始位置后移保证不重复
+            backtracking(s,i+1);
+            //回溯
+            deque.removeLast();
+        }
+    }
+
+    //判断是否是回文串
+    private boolean isPalindrome(String s, int startIndex, int end){
+        for(int i = startIndex, j = end; i < j ; i++,j--){
+            if(s.charAt(i) != s.charAt(j)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
