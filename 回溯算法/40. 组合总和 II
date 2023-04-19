@@ -1,0 +1,38 @@
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        //标记数组，用来辅助判断同层结点是否已经遍历
+        boolean[] used = new boolean[candidates.length];
+        Arrays.fill(used, false);
+        //为了将重复的元素放到一起，所以进行排序
+        Arrays.sort(candidates);
+        backtracking(candidates,target,0,0,used);
+        return result;
+    }
+
+    private void backtracking(int[] candidates, int target, int startIndex, int sum, boolean[] used){
+        if(sum > target) return;//剪枝
+        if(sum == target){//得到结果
+            result.add(new ArrayList(path));
+            return;
+        }
+        for(int i = startIndex; i < candidates.length ; i++){
+            if(sum + candidates[i] > target){//剪枝
+                break;
+            }
+            //出现重复结点且同层的第一个结点已经被访问过，直接跳过。
+            if(i > 0 && candidates[i] == candidates[i - 1] && used[i-1]==false){
+                continue;
+            }
+            path.add(candidates[i]);
+            sum += candidates[i];
+            used[i] = true;
+            backtracking(candidates,target,i+1, sum, used);
+            //回溯
+            used[i] = false;
+            sum -= candidates[i];
+            path.removeLast();
+        }
+    }
+}
