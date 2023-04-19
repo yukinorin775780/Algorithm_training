@@ -4,7 +4,7 @@
 视频讲解: https://www.bilibili.com/video/BV1KT4y1M7HJ
 
 40.组合总和II
-题目链接: 
+题目链接: https://leetcode.cn/problems/combination-sum-ii/
 文章讲解: https://programmercarl.com/0040.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII.html
 视频讲解: https://www.bilibili.com/video/BV12V4y1V73A
 
@@ -15,7 +15,7 @@
 
 ● 自己看到题目的第一想法：
 39. 根据题意可得树的宽度是有整数数组的大小来决定，而树的深度是有目标整数来决定。元素可以重复使用说明for循环的startIndex是与77.组合不同的。具体如何实现不太清楚。
-40. 
+40. 与39的区别是使用过的数字不能再使用了，但是candidates数组中会有重复的数字。那么肯定要对数组先排序，排序之后再根据77.组合的方法得到的结果会有重复的组合，但题目要求结集中不能有重复的组合。所以卡住啦...
 131. 
 
 ● 看完代码随想录之后的想法：
@@ -24,10 +24,15 @@
     2.递归终止条件: sum > target return; sum == target 找到了一个目标数组，result中记录path return;
     3.单层循环逻辑: for循环 i 从 startIndex 开始， i < 数组的大小 ; i++ {元素 i 放入 path；累加sum；递归；回溯(弹出i和sum-=i)} 
     剪枝操作: 可以对candidates数组进行排序，如果sum + candidates[i] 已经大于 target 时，就没有必要继续往下遍历了，所以在for循环中可以添加判断 sum + candidates[i] <= target 
-40. 
+40. 最重要的就是对结果集进行去重操作，分为“树层去重”和“树枝去重”。此题需要的是“树层去重”: 前面数字相同的元素已经遍历过后面所有元素了，所以当前元素应该跳过。回溯三部曲:
+    1.递归函数参数: 全局变量:二维数组结果集result,一维数组单结果path,以及布尔数组used表示当前位置的元素是否遍历过。以及题目给的两个参数和startIndex用来告诉数组从哪里
+    2.递归终止条件: sum > target 返回; sum == target 找到了目标组合 返回。
+    3.单层循环逻辑: for循环从startIndex开始遍历到candidates.length; 因为是“树层去重”，for循环就是树层的逻辑，所以要在for循环中进行去重。
+    去重的逻辑是如果当前元素和上一个元素相等且used[i-1]==0时才需要去重，当used[i-1]==1是“树枝去重”的逻辑，所以要用used[i-1]==0来避免树枝去重。
+    总结：去重的核心逻辑是根据元素是否相等已经一个boolean used[]来保证树层去重而避免树枝去重。
 131. 
 
 ● 自己实现过程中遇到哪些困难或者错误：
 39. result.add(new ArrayList<>(path)); 不能是 result.add(path)
-40. 
+40. if(i > 0 && candidates[i] == candidates[i - 1] && used[i-1]==false){} 要理解为什么used[i-1]==false: 当used[i-1]==true时，说明之前的点正在遍历中，是要避免“树枝去重”。
 131. 
