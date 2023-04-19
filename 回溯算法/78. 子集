@@ -1,0 +1,22 @@
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();//保存结果集
+    LinkedList<Integer> path = new LinkedList<>();//保存单条结果路径
+    public List<List<Integer>> subsets(int[] nums) {
+        backtracking(nums,0);
+        return result;
+    }
+
+    private void backtracking(int[] nums, int startIndex){
+        result.add(new ArrayList(path));
+        if(startIndex >= nums.length){//可以省略，因为for循环在startIndex >= nums.length时就已经停止了
+            return;
+        }
+        for(int i = startIndex; i < nums.length ; i++){
+            path.add(nums[i]);
+            //递归
+            backtracking(nums, i+1);
+            //回溯
+            path.removeLast();
+        }
+    }
+}
