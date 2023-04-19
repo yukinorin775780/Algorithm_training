@@ -1,4 +1,4 @@
-
+//方法1: 利用pointNum:添加'.'的数量和isVaild方法来实现 效率较低
 class Solution {
     List<String> result = new ArrayList<>();
     public List<String> restoreIpAddresses(String s) {
@@ -52,3 +52,4 @@ class Solution {
         return true;
     }
 }
+
