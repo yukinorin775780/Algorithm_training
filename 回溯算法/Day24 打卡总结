@@ -1,5 +1,5 @@
 93.复原IP地址
-题目链接: 
+题目链接: https://leetcode.cn/problems/restore-ip-addresses/
 文章讲解: https://programmercarl.com/0093.%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80.html
 视频讲解: https://www.bilibili.com/video/BV1XP4y1U73i/
 
@@ -13,3 +13,20 @@
 文章讲解: https://programmercarl.com/0090.%E5%AD%90%E9%9B%86II.html
 视频讲解: https://www.bilibili.com/video/BV1vm4y1F71J
 
+● 自己看到题目的第一想法：
+93. 与之前的分割回文串有些类似，分割是通过控制stratIndex和i来实现的。但是递归的终止条件是什么没有明白。还有就是不知道怎么通过字符串转int来判断是否在0,255之间。
+78. 
+90. 
+
+● 看完代码随想录之后的想法：
+93. 回溯三部曲:
+    1.递归参数: 全局变量 result, 传入字符串s 和 startIndex 用来告诉for循环从哪里开始遍历，以及pointNum用来记录'.'的数量（决定了树的深度)。
+    2.递归终止条件: pointNum == 3 说明已经将字符串分割成了4个子串，每次放'.'之前都要检验'.'之前子串的合法性，所以在终止条件中需要对'.'后即最后的子串[startIndex,s.length()-1]进行合法性判断，通过才能加入result。
+    3.单层递归逻辑: 如果子串[startIndex,i]合法，在i+1的位置加'.';pointNum+1; 递归(递归起始位置是i+2 因为之前加了'.')；回溯要删除'.'以及pointNum-1.
+78. 
+90. 
+
+● 自己实现过程中遇到哪些困难或者错误：
+93. 无
+78. 
+90. 
