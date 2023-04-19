@@ -9,14 +9,14 @@
 视频讲解: https://www.bilibili.com/video/BV12V4y1V73A
 
 131.分割回文串
-题目链接: 
+题目链接: https://leetcode.cn/problems/palindrome-partitioning/
 文章讲解: https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html
 视频讲解: https://www.bilibili.com/video/BV1c54y1e7k6
 
 ● 自己看到题目的第一想法：
 39. 根据题意可得树的宽度是有整数数组的大小来决定，而树的深度是有目标整数来决定。元素可以重复使用说明for循环的startIndex是与77.组合不同的。具体如何实现不太清楚。
 40. 与39的区别是使用过的数字不能再使用了，但是candidates数组中会有重复的数字。那么肯定要对数组先排序，排序之后再根据77.组合的方法得到的结果会有重复的组合，但题目要求结集中不能有重复的组合。所以卡住啦...
-131. 
+131. 无想法..
 
 ● 看完代码随想录之后的想法：
 39. 与组合问题差异是在剩余集合中需要带入原来的选取过的元素才能达成重复使用数字的目的。回溯三部曲:
@@ -30,9 +30,14 @@
     3.单层循环逻辑: for循环从startIndex开始遍历到candidates.length; 因为是“树层去重”，for循环就是树层的逻辑，所以要在for循环中进行去重。
     去重的逻辑是如果当前元素和上一个元素相等且used[i-1]==0时才需要去重，当used[i-1]==1是“树枝去重”的逻辑，所以要用used[i-1]==0来避免树枝去重。
     总结：去重的核心逻辑是根据元素是否相等已经一个boolean used[]来保证树层去重而避免树枝去重。
-131. 
+131. 分割和回文是两大难点。分割和组合有点相像，举个例子：组合问题：选取一个a之后，在bcdef中再去选取第二个，选取b之后在cdef中再选取第三个.....。切割问题：切割一个a之后，在bcdef中再去切割第二段，切割b之后在cdef中再切割第三段.....。
+     回溯三部曲:
+     1.递归函数的参数: 全局变量一维数组path二维数组path，参数是字符串s和startIndex用于告诉for从哪里开始遍历。
+     2.递归终止条件: 代码用什么来表示切割线呢？startIndex就是切割的线。所以如果startIndex == s.size()说明已经到了叶子结点，所以就收集path到result然后return
+     3.单层循环逻辑: for循环从startIndex开始, i<s.size();i++{ 要切割的子串是 s[startIndex,i] 定义判断字符串是否回文的方法， 如果是回文的就收录到path中，如果不是就直接跳过；
+     递归；回溯；}
 
 ● 自己实现过程中遇到哪些困难或者错误：
 39. result.add(new ArrayList<>(path)); 不能是 result.add(path)
 40. if(i > 0 && candidates[i] == candidates[i - 1] && used[i-1]==false){} 要理解为什么used[i-1]==false: 当used[i-1]==true时，说明之前的点正在遍历中，是要避免“树枝去重”。
-131. 
+131. 要理解分割在代码中的体现: [startIndex,i]的字符串。
