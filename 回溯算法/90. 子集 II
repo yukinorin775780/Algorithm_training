@@ -1,0 +1,35 @@
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();//存放结果集
+    LinkedList<Integer> path = new LinkedList<>();//存放单条结果路径
+    boolean[] used;
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        if(nums.length == 0){
+            result.add(path);
+            return result;
+        }
+        Arrays.sort(nums);//处理重复元素的前提是对nums进行排序
+        used = new boolean[nums.length];
+        backtracking(nums,0);
+        return result;
+    }
+
+    private void backtracking(int[] nums, int startIndex){
+        result.add(new ArrayList<>(path));
+        if(startIndex >= nums.length){
+            return;
+        }
+        for(int i = startIndex; i < nums.length; i++){
+            //用来判断是否重复使用过
+            if( i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false){
+                continue;
+            }
+            path.add(nums[i]);
+            used[i] = true;
+            //递归
+            backtracking(nums,i+1);
+            //回溯
+            path.removeLast();
+            used[i] = false;
+        }
+    }
+}
