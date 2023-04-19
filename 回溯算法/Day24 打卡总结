@@ -9,14 +9,14 @@
 视频讲解: https://www.bilibili.com/video/BV1U84y1q7Ci
 
 90.子集II
-题目链接: 
+题目链接: https://leetcode.cn/problems/subsets-ii/
 文章讲解: https://programmercarl.com/0090.%E5%AD%90%E9%9B%86II.html
 视频讲解: https://www.bilibili.com/video/BV1vm4y1F71J
 
 ● 自己看到题目的第一想法：
 93. 与之前的分割回文串有些类似，分割是通过控制stratIndex和i来实现的。但是递归的终止条件是什么没有明白。还有就是不知道怎么通过字符串转int来判断是否在0,255之间。
 78. 与77.组合的回溯思路基本一致。有区别的地方在于通过什么方式将单条路径记录到result，因为有for循环的存在且数组元素不重复，所以在终止条件前也就是递归函数的最开始将路径记录就行。
-90. 
+90. 与78.子集的区别是有重复的元素，在这之前有学习过 40.组合总和III 可以用一个boolean used[]来表示是否用过。当然前提是先排序。
 
 ● 看完代码随想录之后的想法：
 93. 回溯三部曲:
@@ -32,4 +32,4 @@
     stringBuilder.delete(start + number, i + number + 2);
     这句应该怎么理解比较合适呢？number代表的是ip段的数量 这与要删除的网段长度有什么关系呢？
 78. 无
-90. 
+90. used[]
