@@ -32,4 +32,4 @@
     stringBuilder.delete(start + number, i + number + 2);
     这句应该怎么理解比较合适呢？number代表的是ip段的数量 这与要删除的网段长度有什么关系呢？
 78. 无
-90. used[]
+90. used[] 需要在全局变量中声明，如果没有声明编译器会报错说找不到used;
