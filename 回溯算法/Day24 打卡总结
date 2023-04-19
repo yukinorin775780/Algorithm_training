@@ -27,6 +27,8 @@
 90. 
 
 ● 自己实现过程中遇到哪些困难或者错误：
-93. 无
+93. // 删除当前stringBuilder最后一个网段，注意考虑点的数量的问题
+    stringBuilder.delete(start + number, i + number + 2);
+    这句应该怎么理解比较合适呢？number代表的是ip段的数量 这与要删除的网段长度有什么关系呢？
 78. 
 90. 
