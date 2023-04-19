@@ -1,3 +1,4 @@
+//方法1: 运用used数组来实现去重
 class Solution {
     List<List<Integer>> result = new ArrayList<>();//存放结果集
     LinkedList<Integer> path = new LinkedList<>();//存放单条结果路径
@@ -30,6 +31,36 @@ class Solution {
             //回溯
             path.removeLast();
             used[i] = false;
+        }
+    }
+}
+
+//方法2: 不使用used数组来去重
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();//存放结果集
+    LinkedList<Integer> path = new LinkedList<>();//存放单条结果路径
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        if(nums.length == 0){
+            result.add(path);
+            return result;
+        }
+        Arrays.sort(nums);//处理重复元素的前提是对nums进行排序
+        backtracking(nums,0);
+        return result;
+    }
+
+    private void backtracking(int[] nums, int startIndex){
+        result.add(new ArrayList<>(path));
+        for(int i = startIndex; i < nums.length; i++){
+            //跳过当前数层使用过的、相同的元素
+            if( i > startIndex && nums[i-1] == nums[i]){
+                continue;
+            }
+            path.add(nums[i]);
+            //递归
+            backtracking(nums,i+1);
+            //回溯
+            path.removeLast();
         }
     }
 }
