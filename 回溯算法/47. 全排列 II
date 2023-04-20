@@ -1,0 +1,35 @@
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    boolean[] used;
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        used = new boolean[nums.length];
+        Arrays.fill(used,false);//初始化数组
+        Arrays.sort(nums);//用used数组的前提是排序
+        backtracking(nums,used);
+        return result;
+    }
+    private void backtracking(int[] nums, boolean[] used){
+        if(path.size() == nums.length){
+            result.add(new ArrayList(path));
+            return;
+        }
+        for(int i = 0; i < nums.length; i++){
+            //used[i-1]==true说明同一树枝nums[i-1]使用过
+            //used[i-1]==false说明同一树层nums[i-1]使用过
+            if(i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false){
+                continue;
+            }
+            //当前结点处理过，跳过
+            if(used[i] == true){
+                continue;
+            }
+            used[i] = true;//标记当前结点使用过
+            path.add(nums[i]);
+            backtracking(nums,used);
+            //回溯
+            path.removeLast();
+            used[i] = false;
+        }
+    }
+}
