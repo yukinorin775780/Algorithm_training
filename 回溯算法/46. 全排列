@@ -1,0 +1,49 @@
+//方法1: 通过used[] 来记录是否遍历过当前元素
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    boolean[] used;
+    public List<List<Integer>> permute(int[] nums) {
+        used = new boolean[nums.length];
+        backtracking(nums);
+        return result;
+    }
+    
+    private void backtracking(int[] nums){
+        if(path.size() == nums.length){
+            result.add(new ArrayList(path));
+            return;
+        }
+        for(int i = 0; i < nums.length ; i++){
+            if( used[i] == true) continue;//遇到已经遍历过的数值，跳过
+            path.add(nums[i]);
+            used[i] = true;
+            backtracking(nums);
+            path.removeLast();
+            used[i] = false;
+        }
+    }
+}
+
+//方法2: 利用path.contains来判断是否遍历过当前元素
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public List<List<Integer>> permute(int[] nums) {
+        backtracking(nums);
+        return result;
+    }
+    
+    private void backtracking(int[] nums){
+        if(path.size() == nums.length){
+            result.add(new ArrayList(path));
+            return;
+        }
+        for(int i = 0; i < nums.length ; i++){
+            if(path.contains(nums[i])) continue;//遇到已经遍历过的数值，跳过
+            path.add(nums[i]);
+            backtracking(nums);
+            path.removeLast();
+        }
+    }
+}
