@@ -1,0 +1,58 @@
+//方法1: 通过 局部变量 int[] used 来实现记录本层的数值出现次数
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        backtracking(nums,0);
+        return result;
+    }
+
+    private void backtracking(int[] nums, int startIndex){
+        if(path.size() > 1){
+            result.add(new ArrayList(path));
+        }
+        int[] used = new int[201];//因为题目数组中的值是[-100,100] 通过 nums[i] + 100 将 used[]数组下标 > 0
+        for(int i = startIndex ; i < nums.length ; i++){
+            //路径不为空且当前数值小于路径的最后的值 或者 当前数值在本层出现过，就跳过
+            if( !path.isEmpty() && nums[i] < path.get(path.size() - 1) || used[nums[i] + 100] == 1){
+                continue;
+            }
+            used[nums[i] + 100] = 1; //记录本层本层数组使用过的数字
+            path.add(nums[i]);
+            backtracking(nums,i + 1);
+            path.removeLast();
+        }
+    }
+}
+
+//方法2: 通过 局部变量 map 来实现记录本层的数值出现次数
+class Solution {
+    List<List<Integer>> result = new ArrayList<>();
+    LinkedList<Integer> path = new LinkedList<>();
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        backtracking(nums,0);
+        return result;
+    }
+
+    private void backtracking(int[] nums, int startIndex){
+        if(path.size() > 1){
+            result.add(new ArrayList(path));
+        }
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i = startIndex ; i < nums.length ; i++){
+            //路径不为空且当前数值小于路径的最后的值
+            if(!path.isEmpty() && nums[i] < path.getLast()){
+                continue;
+            }
+            //使用用过了的数字
+            if(map.getOrDefault(nums[i], 0) >= 1){
+                continue;
+            }
+            //标记此数使用过
+            map.put(nums[i],map.getOrDefault(nums[i],0)+1);
+            path.add(nums[i]);
+            backtracking(nums,i + 1);
+            path.removeLast();
+        }
+    }
+}
