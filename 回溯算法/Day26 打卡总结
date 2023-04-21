@@ -6,7 +6,7 @@ https://programmercarl.com/%E5%9B%9E%E6%BA%AF%E6%80%BB%E7%BB%93.html
 文章讲解: https://programmercarl.com/0332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B.html
 
 51. N皇后（可跳过）
-题目链接: 
+题目链接: https://leetcode.cn/problems/n-queens/
 文章讲解: https://programmercarl.com/0051.N%E7%9A%87%E5%90%8E.html
 视频讲解: https://www.bilibili.com/video/BV1Rd4y1c7Bq
 
@@ -17,7 +17,7 @@ https://programmercarl.com/%E5%9B%9E%E6%BA%AF%E6%80%BB%E7%BB%93.html
 
 ● 自己看到题目的第一想法：
 332. 跟回溯的关系不大，更像是深度优先搜索。
-51. 
+51. N皇后是噩梦！
 37. 
 
 ● 看完代码随想录之后的想法：
@@ -25,7 +25,10 @@ https://programmercarl.com/%E5%9B%9E%E6%BA%AF%E6%80%BB%E7%BB%93.html
      1.递归函数参数: 用全局变量 map 来记录航班的映射关系，还需要一个ticketNum来表示有多少个航班 返回值是boolean的原因是只需要找到一个行程即树形结构中唯一的一条通向叶子结点的路线。
      2.递归终止条件: 回溯遍历的过程中，遇到的机场个数，如果达到了（航班数量+1），那么我们就找到了一个行程，把所有航班串在一起了。
      3.单层搜索逻辑: 本题既要找到一个对数据进行排序的容器，而且还要容易增删元素，迭代器还不能失效。
-51. 
+51. 难点在于用回溯算法去遍历二维数组！回溯三部曲:
+    1.递归函数参数: 全局变量 二维数组result 参数n表示棋盘的大小，用row来记录当前遍历到棋盘的第几层了。
+    2.递归终止条件: row == n 说明到最后一行了，记录结果 
+    3.单层搜索逻辑: for循环从0到n{ 如果 isVaild(row,i,chesssboard,n) 判断位置是否合法 如果合法就放"Q"，递归，回溯}
 37. 
 
 ● 自己实现过程中遇到哪些困难或者错误：
