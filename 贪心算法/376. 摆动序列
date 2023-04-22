@@ -1,0 +1,22 @@
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        if(nums.length <= 1){
+            return nums.length;
+        }
+        //当前差值
+        int curDiff = 0;
+        //上一个差值
+        int preDiff = 0;
+        int count = 1; //直接将尾记录
+        for(int i = 0; i < nums.length - 1; i++){
+            //当前差值
+            curDiff = nums[i + 1] - nums[i];
+            if((curDiff > 0 && preDiff <=0) ||(curDiff < 0 && preDiff >= 0)){
+                count++;
+                //当单调坡发生了变化时才将preDiff记录
+                preDiff = curDiff;
+            }
+        }
+        return count;
+    }
+}
