@@ -1,0 +1,13 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profitSum = 0;
+        int result = 0;//每一天的利润
+        for(int i = 1 ; i < prices.length; i++){
+            result = prices[i] - prices[i - 1];
+            if(result > 0){//每日是正收益则记录
+                profitSum += result;
+            }
+        }
+        return profitSum;
+    }
+}
