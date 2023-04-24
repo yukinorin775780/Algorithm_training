@@ -1,0 +1,22 @@
+class Solution {
+    public int candy(int[] ratings) {
+        int[] candy = new int[ratings.length];
+        //右边的孩子比左边的孩子高
+        for(int i = 1; i < ratings.length ; i++){
+            if(ratings[i] > ratings[i - 1]){
+                candy[i] = candy[i - 1] + 1;
+            }
+        }
+        //左边孩子比右边孩子高
+        for(int i = ratings.length - 2; i >= 0 ; i--){
+            if(ratings[i] > ratings[i + 1]){
+                candy[i] = Math.max(candy[i], candy[i+1] + 1);
+            }
+        }
+        int cSum = 0;
+        for(int i = 0; i < candy.length; i++){
+            cSum += candy[i];
+        }
+        return cSum + candy.length;
+    }
+}
