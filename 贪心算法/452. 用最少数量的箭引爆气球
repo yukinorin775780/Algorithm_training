@@ -1,0 +1,19 @@
+class Solution {
+    public int findMinArrowShots(int[][] points) {
+        //1.Arrays.sort是静态方法，用于对数组进行排序，接受了一个数组points和一个比较器(Comparator)作为参数。比较器是一个函数，用于指定排序的规则
+        //2.(a,b) -> Integer.compare(a[0],b[0])是一个lambda函数，用于实现比较器的功能。它接受两个参数('a','b')，并返回它们之间比较的结果
+        //3.Integer.compare(a[0],b[0])用于比较两个整数的大小。在这里比较的是数组'a'和'b'的第一个元素，如果'a[0]' < 'b[0]'，则返回负数；如果'a[0]' = 'b[0]',则返回0；如果'a[0]' > 'b[0]',则返回正数
+        //因此是按照每个数组的第一个元素对数组points进行升序排列
+        Arrays.sort(points, (a,b) -> Integer.compare(a[0],b[0]));
+        int count = 1;//points不为空至少需要1箭
+        for(int i = 1; i < points.length; i++){
+            if(points[i][0] > points[i-1][1]){//当前气球左边界 < 上一个气球的右边界 即当前气球和上一个气球没有重叠
+                count++;
+            }else{//当前气球和上一个气球有重叠
+                //更新重叠气球最小右边界
+                points[i][1] = Math.min(points[i][1],points[i-1][1]);
+            }
+        }
+        return count;
+    }
+}
