@@ -1,0 +1,16 @@
+class Solution {
+    public int[][] reconstructQueue(int[][] people) {
+        //身高从大到小排序(身高相同k从小到大)
+        Arrays.sort(people, (a,b) ->{
+            if(a[0] == b[0]) return a[1] - b[1]; //如果身高相同则按k升序排列
+            return b[0] - a[0]; //身高不同则按身高将序排列
+        });
+        //链表的插入效率更高
+        LinkedList<int[]> que = new LinkedList<>();
+        for(int[] p : people){
+            //将后面的元素根据k的值即p[1] 插入到当前链表的p[1]位置。
+            que.add(p[1],p); // add(int index, E element)
+        }
+        return que.toArray(new int[people.length][]);
+    }
+}
