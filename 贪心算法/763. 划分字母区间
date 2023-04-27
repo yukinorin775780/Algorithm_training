@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        List<Integer> result = new LinkedList<>();//结果集
+        int[] edge = new int[26];//记录每个字母最后出现的位置
+        char[] c = s.toCharArray();
+        //通过不断修改每个字母的当前位置来实现记录每个字母最后出现的位置
+        for(int i = 0; i < c.length; i++){
+            edge[c[i] - 'a'] = i; 
+        } 
+        int left = 0;//左区间边界
+        int right = 0;//右区间边界
+        for(int i = 0; i < c.length; i++){
+            //更新当前元素出现的最远位置
+            right = Math.max(right, edge[c[i] - 'a']);
+            if(i == right){//到达最远位置
+                result.add( i - left + 1);//添加结果
+                left = i + 1;//更新下一个区间的左边界
+            }
+        }
+        return result;
+    }
+}
