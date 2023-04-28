@@ -1,0 +1,21 @@
+class Solution {
+    public int monotoneIncreasingDigits(int n) {
+        //将n转换成字符串
+        String s = String.valueOf(n);
+        //将字符串转换成字符数组
+        char[] c = s.toCharArray();
+        int flag = s.length();
+        for(int i = s.length() - 1; i > 0; i--){
+            if(c[i-1] > c[i]){//非单调递增
+                c[i-1]--;
+                flag = i;//记录需要修改成9的位置
+            }
+        }
+        for(int i = flag; i < s.length(); i++){
+            c[i] = '9';
+        }
+        // 1.String.valueOf(c) -> 将c转换成一个字符串
+        // 2.Integer.parseInt() -> 将字符串形式的数字转换成 int
+        return Integer.parseInt(String.valueOf(c));
+    }
+}
