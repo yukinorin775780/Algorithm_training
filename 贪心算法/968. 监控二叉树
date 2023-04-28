@@ -1,0 +1,41 @@
+class Solution {
+    int result = 0;
+    public int minCameraCover(TreeNode root) {
+        //如果遍历结束后根结点的状态是无覆盖，那么需要加一个摄像头
+        if(traversal(root)==0) result++;
+        return result;
+    }
+    /**
+    结点状态值:
+     0 表示无覆盖
+     1 表示 有摄像头
+     2 表示有覆盖
+    后序遍历，根据左右结点的状态来判断当前结点的状态
+    */
+    public int traversal(TreeNode root){
+        if(root == null){
+            //空结点默认是有覆盖状态，尽量避免在叶子结点上放摄像头
+            return 2;
+        }
+        //左
+        int left = traversal(root.left);
+        //右
+        int right = traversal(root.right);
+        //中
+        //如果左右结点都是有覆盖的情况，那么当前结点的状态就应该是无覆盖
+        if(left == 2 && right == 2){
+            //(2,2)
+            return 0;
+        //如果左右结点中至少有一个结点是无覆盖的状态，那么当前结点就要放一个摄像头
+        }else if(left == 0 || right == 0){
+            //(0,0) (0,1) (0,2) (1,0) (2,0)
+            //状态值为 1 摄像头数++
+            result++;
+            return 1;
+        //如果左右结点至少有一个结点是有摄像头的状态，那么当前结点应该是有覆盖
+        }else{
+            //(1,1) (1,2) (2,1)
+            return 2;
+        }
+    }
+}
