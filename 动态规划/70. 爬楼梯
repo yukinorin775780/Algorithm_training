@@ -1,0 +1,16 @@
+class Solution {
+    public int climbStairs(int n) {
+        int[] dp = new int[n+1];
+        if(n<=1) return 1;
+        //此题既可以为0也可以为1 
+        //为0时因为无楼梯，所以没有爬楼梯的方法
+        //为1时可以理解为方便初始化，不需要初始化dp[2] = 2，在for循环中从2开始遍历
+        dp[0] = 0;
+        dp[1] = 1;
+        dp[2] = 2;
+        for(int i = 3; i <= n;i++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+}
