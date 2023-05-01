@@ -1,0 +1,15 @@
+class Solution {
+    public int numTrees(int n) {
+        int[] dp = new int[n+1];
+        dp[0] = 1;
+        dp[1] = 1;
+        for(int i = 2 ; i <= n ; i++){
+            //把j理解为从1开始作为头结点，一直遍历到i
+            for(int j = 1; j <= i ; j++){
+                //左子树dp[j-1] * 右子树dp[i-j]
+                dp[i] += dp[j - 1] * dp[i - j];
+            }
+        }
+        return dp[n];
+    }
+}
