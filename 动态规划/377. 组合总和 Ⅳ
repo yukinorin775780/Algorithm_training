@@ -1,0 +1,13 @@
+class Solution {
+    public int combinationSum4(int[] nums, int target) {
+        int[] dp = new int[target + 1];
+        dp[0] = 1;
+        for(int i = 0 ; i <= target ; i++){ //先遍历背包容量
+            for(int j = 0 ; j < nums.length ;j++){ //再遍历物品
+                if(i >= nums[j])//递推公式中数组下标非负判断
+                    dp[i] += dp[i-nums[j]];
+            }
+        }
+        return dp[target];
+    }
+}
