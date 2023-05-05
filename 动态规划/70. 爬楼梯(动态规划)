@@ -1,0 +1,15 @@
+class Solution {
+    public int climbStairs(int n) {
+        int[] dp = new int[n+1];
+        int[] step = {1,2};
+        dp[0] = 1;
+        for(int i = 0 ; i <= n ; i++){ //先遍历背包容量
+            for(int j = 0 ; j < step.length ; j++){ //再遍历物品
+                if(i >= step[j]){
+                    dp[i] += dp[i - step[j]];
+                }
+            }   
+        }
+        return dp[n];
+    }
+}
