@@ -1,0 +1,15 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        HashSet<String> set = new HashSet<>(wordDict);
+        boolean[] valid = new boolean[s.length() + 1];
+        valid[0] = true;
+        for(int i = 1; i <= s.length(); i++){ //先遍历背包
+            for(int j = 0; j < i && !valid[i]; j++){ //再遍历物品
+                if(set.contains(s.substring(j,i)) && valid[j]){
+                    valid[i] = true;
+                }
+            }
+        }
+        return valid[s.length()];
+    }
+}
