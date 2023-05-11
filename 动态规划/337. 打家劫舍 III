@@ -1,0 +1,18 @@
+class Solution {
+    public int rob(TreeNode root) {
+        if(root == null) return 0;
+        int[] result = robAction(root);
+        return Math.max(result[0],result[1]);    
+    }
+
+    public int[] robAction(TreeNode root){
+        //终止条件
+        if(root == null) return new int[]{0,0};
+        //后序遍历
+        int[] leftdp = robAction(root.left);
+        int[] rightdp = robAction(root.right);
+        int val1 = root.val + leftdp[0] + rightdp[0];
+        int val2 = Math.max(leftdp[0], leftdp[1]) + Math.max(rightdp[0], rightdp[1]);
+        return new int[]{val2, val1};
+    }
+}
