@@ -1,4 +1,4 @@
-# 题目链接：https://kamacoder.com/problempage.php?pid=1044
+# 题目地址：https://kamacoder.com/problempage.php?pid=1044
 
 def main():
     import sys
