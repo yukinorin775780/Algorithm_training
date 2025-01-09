@@ -14,4 +14,4 @@ class Solution:
                 if cur.right:
                     queue.append(cur.right)
             result.append(level)
-        return result[::-1]
+        return result[::-1] # 翻转层序遍历结果
