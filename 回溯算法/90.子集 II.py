@@ -33,6 +33,7 @@ class Solution:
         result.append(path[:])
         uset = set()
         for i in range(start_index, len(nums)):
+            # 数层去重
             if nums[i] in uset:
                 continue
             uset.add(nums[i])
