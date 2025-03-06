@@ -18,4 +18,4 @@ class Solution:
                 else:
                     dp[i][j] = max(dp[i][j-1], dp[i-1][j])
         
-        return dp[len(text1)][len(text2)]1143. 最长公共子序列
+        return dp[len(text1)][len(text2)]
